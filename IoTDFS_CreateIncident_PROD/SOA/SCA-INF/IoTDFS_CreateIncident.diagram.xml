@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="Incident">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="124" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="117" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="Incident" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/Incident#wsdl.interface(Incident_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>CreateIncident</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gService name="IoTAlert">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="242" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="235" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="IoTAlert" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/DeviceAlert#wsdl.interface(DeviceAlert_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>Alert</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gService name="CustomerIncident">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="360" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="353" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="CustomerIncident" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SOACS/IoTDFS_CreateIncident/CustomerIncident#wsdl.interface(CustomerIncident_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>CreateCustomerIncident</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gService name="IotSimulatorAlert">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="478" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="471" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="IotSimulatorAlert" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SOACS/IoTDFS_CreateIncident/IotSimulatorAlert#wsdl.interface(IotSimulatorAlert_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>Operation_IoTSim</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gReference name="insert_CRM_Incident">
+        <dgm:body borderWidth="2" arcRad="20" X="720" Y="26" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="710" Y="19" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="insert_CRM_Incident" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident/insert_CRM_Incident#wsdl.interface(insert_CRM_Incident_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>insert</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="get_Contact">
+        <dgm:body borderWidth="2" arcRad="20" X="720" Y="144" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="710" Y="137" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="get_Contact" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident/get_Contact#wsdl.interface(get_Contact_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>get_Contact</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="Error_Email">
+        <dgm:body borderWidth="2" arcRad="20" X="720" Y="262" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="710" Y="255" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="Error_Email" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess#wsdl.interface(EmailNotificationProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gReference name="getContactDetails">
+        <dgm:body borderWidth="2" arcRad="20" X="720" Y="350" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="710" Y="343" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="getContactDetails" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident/getContactDetails#wsdl.interface(getContactDetails_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>getContactDetailsSelect</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="QueryRNLookup">
+        <dgm:body borderWidth="2" arcRad="20" X="720" Y="468" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="710" Y="461" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="QueryRNLookup" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident/QueryRNLookup#wsdl.interface(QueryRNLookup_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>QueryRNLookup</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="CreateIncident_RN">
+        <dgm:body borderWidth="2" arcRad="20" X="720" Y="586" width="136" height="54">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="710" Y="579" width="156" height="68">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="CreateIncident_RN" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="urn:wsdl.ws.rightnow.com/v1_3#wsdl.interface(RightNowSyncPort)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="14" Y="4" width="20" height="20"/>
+        <dgm:operations/>
+    </dgm:gReference>
+    <dgm:gComponent name="CreateIncident">
+        <dgm:body borderWidth="2" arcRad="20" X="374" Y="250" width="130" height="186">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="364" Y="243" width="150" height="202">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="Incident" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/Incident#wsdl.interface(Incident_ptt)"/>
+        <dgm:inputPort name="DeviceAlert" X="-10" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/DeviceAlert#wsdl.interface(DeviceAlert_ptt)"/>
+        <dgm:inputPort name="CustomerIncident" X="-10" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SOACS/IoTDFS_CreateIncident/CustomerIncident#wsdl.interface(CustomerIncident_ptt)"/>
+        <dgm:inputPort name="IotSimulatorAlert" X="-10" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SOACS/IoTDFS_CreateIncident/IotSimulatorAlert#wsdl.interface(IotSimulatorAlert_ptt)"/>
+        <dgm:outputPort name="insert_CRM_Incident" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident/insert_CRM_Incident#wsdl.interface(insert_CRM_Incident_ptt)"/>
+        <dgm:outputPort name="get_Contact" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident/get_Contact#wsdl.interface(get_Contact_ptt)"/>
+        <dgm:outputPort name="Error_Email" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess#wsdl.interface(EmailNotificationProcess)"/>
+        <dgm:outputPort name="getContactDetails" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident/getContactDetails#wsdl.interface(getContactDetails_ptt)"/>
+        <dgm:outputPort name="QueryRNLookup" X="120" Y="115" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident/QueryRNLookup#wsdl.interface(QueryRNLookup_ptt)"/>
+        <dgm:outputPort name="CreateIncident_RN" X="120" Y="140" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="urn:wsdl.ws.rightnow.com/v1_3#wsdl.interface(RightNowSyncPort)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="Incident" target="CreateIncident/Incident" width="2">
+        <dgm:gSegment X1="168" Y1="134" X2="207" Y2="134"/>
+        <dgm:gSegment X1="207" Y1="134" X2="207" Y2="275"/>
+        <dgm:gSegment X1="207" Y1="275" X2="364" Y2="275"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="IoTAlert" target="CreateIncident/DeviceAlert" width="2">
+        <dgm:gSegment X1="168" Y1="252" X2="192" Y2="252"/>
+        <dgm:gSegment X1="192" Y1="252" X2="192" Y2="300"/>
+        <dgm:gSegment X1="192" Y1="300" X2="364" Y2="300"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="CreateIncident/insert_CRM_Incident" target="insert_CRM_Incident" width="2">
+        <dgm:gSegment X1="514" Y1="275" X2="538" Y2="275"/>
+        <dgm:gSegment X1="538" Y1="275" X2="538" Y2="36"/>
+        <dgm:gSegment X1="538" Y1="36" X2="710" Y2="36"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="CreateIncident/get_Contact" target="get_Contact" width="2">
+        <dgm:gSegment X1="514" Y1="300" X2="553" Y2="300"/>
+        <dgm:gSegment X1="553" Y1="300" X2="553" Y2="154"/>
+        <dgm:gSegment X1="553" Y1="154" X2="710" Y2="154"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="CreateIncident/Error_Email" target="Error_Email" width="2">
+        <dgm:gSegment X1="514" Y1="325" X2="568" Y2="325"/>
+        <dgm:gSegment X1="568" Y1="325" X2="568" Y2="272"/>
+        <dgm:gSegment X1="568" Y1="272" X2="710" Y2="272"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="CustomerIncident" target="CreateIncident/CustomerIncident" width="2">
+        <dgm:gSegment X1="168" Y1="370" X2="192" Y2="370"/>
+        <dgm:gSegment X1="192" Y1="370" X2="192" Y2="325"/>
+        <dgm:gSegment X1="192" Y1="325" X2="364" Y2="325"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="CreateIncident/getContactDetails" target="getContactDetails" width="2">
+        <dgm:gSegment X1="514" Y1="350" X2="568" Y2="350"/>
+        <dgm:gSegment X1="568" Y1="350" X2="568" Y2="360"/>
+        <dgm:gSegment X1="568" Y1="360" X2="710" Y2="360"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="CreateIncident/QueryRNLookup" target="QueryRNLookup" width="2">
+        <dgm:gSegment X1="514" Y1="375" X2="553" Y2="375"/>
+        <dgm:gSegment X1="553" Y1="375" X2="553" Y2="478"/>
+        <dgm:gSegment X1="553" Y1="478" X2="710" Y2="478"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="CreateIncident/CreateIncident_RN" target="CreateIncident_RN" width="2">
+        <dgm:gSegment X1="514" Y1="400" X2="538" Y2="400"/>
+        <dgm:gSegment X1="538" Y1="400" X2="538" Y2="596"/>
+        <dgm:gSegment X1="538" Y1="596" X2="710" Y2="596"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="IotSimulatorAlert" target="CreateIncident/IotSimulatorAlert" width="2">
+        <dgm:gSegment X1="168" Y1="488" X2="207" Y2="488"/>
+        <dgm:gSegment X1="207" Y1="488" X2="207" Y2="350"/>
+        <dgm:gSegment X1="207" Y1="350" X2="364" Y2="350"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>

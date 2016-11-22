@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<properties>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ORGANIZATION_NAME:db_column_type">VARCHAR2</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ORGANIZATION_NAME:db_column_not_null">false</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.CUSTOMER_PARTY_CODE:db_column_not_null">false</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ORGANIZATION_ID:db_column_not_null">false</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.RN_CONTACT_ID:db_column_size">20</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.RN_LOCATION_ID:db_column_size">100</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ORGANIZATION_ID:db_column_size">50</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ISA:db_column_type">VARCHAR2</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ORGANIZATION_NAME:db_column_size">50</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.RN_LOCATION_ID:db_column_not_null">false</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.CUSTOMER_PARTY_CODE:db_column_type">VARCHAR2</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW:db_table_type">TABLE</entry>
+   <entry key="root_descriptor_alias">DFS_CONTACT_DETAILS_VIEW</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ISA:db_column_size">50</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.RN_CONTACT_ID:db_column_type">VARCHAR2</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW:db_column_5">ISA</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW:db_column_4">RN_LOCATION_ID</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.CUSTOMER_PARTY_CODE:db_column_size">50</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW:db_column_3">ORGANIZATION_ID</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW:db_column_2">ORGANIZATION_NAME</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW:db_column_1">RN_CONTACT_ID</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ORGANIZATION_ID:db_column_type">VARCHAR2</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.RN_LOCATION_ID:db_column_type">VARCHAR2</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW:db_column_0">CUSTOMER_PARTY_CODE</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.RN_CONTACT_ID:db_column_not_null">false</entry>
+   <entry key="DFS_CONTACT_DETAILS_VIEW.ISA:db_column_not_null">true</entry>
+</properties>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="QueryRNLookup" adapter="db" wsdlLocation="../WSDLs/QueryRNLookup.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory UIConnectionName="DBCSDataSource" location="eis/DB/IoTDFSDataSource"/>
+   <endpoint-interaction portType="QueryRNLookup_ptt" operation="QueryRNLookup">
+      <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+         <property name="SqlString" value="SELECT ISA,LOOKUP_CODE, LOOKUP_VALUE FROM DFS_RN_LOOKUPS WHERE ISA=#isa and (LOOKUP_VALUE=#lookupValue or LOOKUP_VALUE=#lookupValue1 or LOOKUP_VALUE=#lookupValue2)"/>
+         <property name="GetActiveUnitOfWork" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

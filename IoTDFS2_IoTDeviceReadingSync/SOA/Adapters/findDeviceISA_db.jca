@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="findDeviceISA" adapter="db" wsdlLocation="../WSDLs/findDeviceISA.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory UIConnectionName="DBCSDataSource" location="eis/DB/IoTDFSDataSource"/>
+   <endpoint-interaction portType="findDeviceISA_ptt" operation="findDeviceISASelect">
+      <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+         <property name="DescriptorName" value="findDeviceISA.DeviceInstance"/>
+         <property name="QueryName" value="findDeviceISASelect"/>
+         <property name="MappingsMetaDataURL" value="findDeviceISA-or-mappings.xml"/>
+         <property name="ReturnSingleResultSet" value="false"/>
+         <property name="GetActiveUnitOfWork" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

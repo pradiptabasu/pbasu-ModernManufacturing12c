@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="get_Contact" adapter="db" wsdlLocation="../WSDLs/get_Contact.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory UIConnectionName="IoT_DevDB" location="eis/DB/IoTDFSDataSource"/>
+   <endpoint-interaction portType="get_Contact_ptt" operation="get_Contact">
+      <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+         <property name="SqlString" value="select a.unique_id as asset_serial,a.crm_id as asset_id,a.install_location as rn_locid,a.customer_contact_id as rn_contact,a.ISA as ISA,a.owner as dev_owner,b.rn_id as OrgID,a.IOT_ID,b.NAME as OrgName from DEVICE_INSTANCE a,CUSTOMER_PARTY b where a.IOT_ID=#asset  and  b.code = (select owner from device_instance where IOT_ID=#asset1)"/>
+         <property name="GetActiveUnitOfWork" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

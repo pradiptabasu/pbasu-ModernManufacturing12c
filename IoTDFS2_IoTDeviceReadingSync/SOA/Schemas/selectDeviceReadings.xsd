@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/selectDeviceReadings" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/selectDeviceReadings" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="selectDeviceReadingsInput" type="selectDeviceReadingsInput"/>
+   <xs:complexType name="selectDeviceReadingsInput">
+      <xs:sequence>
+         <xs:element name="deviceId" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="selectDeviceReadingsOutputCollection" type="selectDeviceReadingsOutputCollection"/>
+   <xs:complexType name="selectDeviceReadingsOutputCollection">
+      <xs:sequence>
+         <xs:element name="selectDeviceReadingsOutput" type="selectDeviceReadingsOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="selectDeviceReadingsOutput">
+      <xs:sequence>
+         <xs:element name="IOT_ID" type="xs:string" nillable="true"/>
+         <xs:element name="MESSAGE_TYPE" type="xs:string" nillable="true"/>
+         <xs:element name="RECIVED_TIME" type="xs:dateTime" nillable="true"/>
+         <xs:element name="ISA" type="xs:string" nillable="true"/>
+         <xs:element name="JSON_TEXT" type="xs:string" nillable="true"/>
+         <xs:element name="GENERATED_TIME" type="xs:dateTime" nillable="true"/>
+         <xs:element name="MSG_ID" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

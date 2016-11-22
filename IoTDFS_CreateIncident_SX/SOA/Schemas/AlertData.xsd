@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://TargetNamespace.com/DeviceAlert_Alert_request" targetNamespace="http://TargetNamespace.com/DeviceAlert_Alert_request" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+   <xsd:element name="AlertData">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="clientId" type="xsd:string"/>
+            <xsd:element name="source" type="xsd:string"/>
+            <xsd:element name="destination"/>
+            <xsd:element name="priority" type="xsd:string"/>
+            <xsd:element name="reliability" type="xsd:string"/>
+            <xsd:element name="eventTime" type="xsd:integer"/>
+            <xsd:element name="sender"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="properties"/>
+            <xsd:element name="direction" type="xsd:string"/>
+            <xsd:element name="receivedTime" type="xsd:integer"/>
+            <xsd:element name="sentTime" type="xsd:integer"/>
+            <xsd:element name="payload">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="format" type="xsd:string"/>
+                     <xsd:element name="description" type="xsd:string"/>
+                     <xsd:element name="severity" type="xsd:string"/>
+                     <xsd:element name="category" type="xsd:string"/>
+                     <xsd:element name="status" type="xsd:string"/>
+                     <xsd:element name="severity" type="xsd:string"/>
+                     <xsd:element name="data">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:any minOccurs="0"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

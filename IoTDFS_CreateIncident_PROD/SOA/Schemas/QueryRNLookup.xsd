@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/QueryRNLookup" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/QueryRNLookup" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="QueryRNLookupInput" type="QueryRNLookupInput"/>
+   <xs:complexType name="QueryRNLookupInput">
+      <xs:sequence>
+         <xs:element name="isa" type="xs:string" nillable="true"/>
+         <xs:element name="lookupValue" type="xs:string" nillable="true"/>
+         <xs:element name="lookupValue1" type="xs:string" nillable="true"/>
+         <xs:element name="lookupValue2" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="QueryRNLookupOutputCollection" type="QueryRNLookupOutputCollection"/>
+   <xs:complexType name="QueryRNLookupOutputCollection">
+      <xs:sequence>
+         <xs:element name="QueryRNLookupOutput" type="QueryRNLookupOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="QueryRNLookupOutput">
+      <xs:sequence>
+         <xs:element name="ISA" type="xs:string" nillable="true"/>
+         <xs:element name="LOOKUP_CODE" type="xs:string" nillable="true"/>
+         <xs:element name="LOOKUP_VALUE" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

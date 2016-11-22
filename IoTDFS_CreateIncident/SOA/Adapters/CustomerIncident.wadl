@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlns.oracle.com/SOACS/IoTDFS_CreateIncident/CustomerIncident" xmlns:ns0="http://TargetNamespace.com/CustomerIncident_CreateCustomerIncident_request" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="CustomerIncident">RestService</doc>
+   <grammars>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="http://TargetNamespace.com/CustomerIncident_CreateCustomerIncident_request" schemaLocation="../Schemas/CustomerIncident.xsd"/>
+      </xsd:schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident" schemaLocation="../Schemas/CreateIncident.xsd"/>
+      </xsd:schema>
+   </grammars>
+   <resources>
+      <resource path="/">
+         <method name="POST" soa:wsdlOperation="CreateCustomerIncident">
+            <request>
+               <representation mediaType="application/xml" element="cns:CustomerIncidentReq" xmlns:cns="http://TargetNamespace.com/CustomerIncident_CreateCustomerIncident_request"/>
+               <representation mediaType="application/json" element="cns:CustomerIncidentReq" xmlns:cns="http://TargetNamespace.com/CustomerIncident_CreateCustomerIncident_request"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/xml" element="cns:IncidentResponse" xmlns:cns="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident"/>
+               <representation mediaType="application/json" element="cns:IncidentResponse" xmlns:cns="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

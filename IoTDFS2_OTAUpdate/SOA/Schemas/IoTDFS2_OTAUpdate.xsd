@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bu1="http://www.example.org" targetNamespace="http://www.example.org" elementFormDefault="qualified">
+   <xsd:element name="BatchUpdateReqMsg">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="BatchName" type="bu1:BatchNameType" maxOccurs="unbounded"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="BatchUpdatestatus">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="status" type="xsd:string"/>
+            <xsd:element name="statusMessage" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:complexType name="BatchNameType">
+      <xsd:sequence>
+         <xsd:element name="industryType" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="BatchId" type="xsd:string"/>
+         <xsd:element name="deviceID" type="xsd:string" maxOccurs="unbounded"/>
+         <xsd:element name="attribute" type="xsd:string"/>
+         <xsd:element name="value" type="xsd:string"/>
+         <xsd:element name="operation" type="xsd:string"/>
+         <xsd:element name="status" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="incidentId" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+</xsd:schema>

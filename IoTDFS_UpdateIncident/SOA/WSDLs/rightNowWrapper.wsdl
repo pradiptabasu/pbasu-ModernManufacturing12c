@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="RightNow" targetNamespace="urn:wsdl.ws.rightnow.com/v1_3" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:rnw_v1_3="urn:wsdl.ws.rightnow.com/v1_3" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plnk:partnerLinkType name="UpdateIncident_RN">
+      <plnk:role name="RightNowSyncPort" portType="rnw_v1_3:RightNowSyncPort"/>
+   </plnk:partnerLinkType>
+   <wsdl:import namespace="urn:wsdl.ws.rightnow.com/v1_3" location="oramds:/apps/WSDLs/rightNow.wsdl"/>
+</wsdl:definitions>

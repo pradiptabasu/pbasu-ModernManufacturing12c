@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="QueryRNLookup" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident/QueryRNLookup" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident/QueryRNLookup" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/QueryRNLookup" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plt:partnerLinkType name="QueryRNLookup_plt">
+      <plt:role name="QueryRNLookup_role">
+         <plt:portType name="tns:QueryRNLookup_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/QueryRNLookup" schemaLocation="../Schemas/QueryRNLookup.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="QueryRNLookupInput_msg">
+      <wsdl:part name="QueryRNLookupInput_msg" element="db:QueryRNLookupInput"/>
+   </wsdl:message>
+   <wsdl:message name="QueryRNLookupOutputCollection_msg">
+      <wsdl:part name="QueryRNLookupOutputCollection" element="db:QueryRNLookupOutputCollection"/>
+   </wsdl:message>
+   <wsdl:portType name="QueryRNLookup_ptt">
+      <wsdl:operation name="QueryRNLookup">
+         <wsdl:input message="tns:QueryRNLookupInput_msg"/>
+         <wsdl:output message="tns:QueryRNLookupOutputCollection_msg"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

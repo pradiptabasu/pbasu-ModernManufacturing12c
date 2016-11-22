@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/insert_CRM_Incident" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/insert_CRM_Incident" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="CrmIncidentCollection" type="CrmIncidentCollection"/>
+   <xs:complexType name="CrmIncidentCollection">
+      <xs:sequence>
+         <xs:element name="CrmIncident" type="CrmIncident" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CrmIncident">
+      <xs:sequence>
+         <xs:element name="rnIncidentId" type="string50"/>
+         <xs:element name="deviceInstanceId" type="string50" minOccurs="0" nillable="true"/>
+         <xs:element name="deviceOwner" type="string50" minOccurs="0" nillable="true"/>
+         <xs:element name="rnContactId" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="subject" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="eventTime" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="status" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="isa" type="string20" minOccurs="0" nillable="true"/>
+         <xs:element name="rnLocationId" type="string50" minOccurs="0" nillable="true"/>
+         <xs:element name="incidentPriority" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="category" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="email" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="product" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="customerOrganization" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="assetName" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="assetStatus" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="assetSerialNumber" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="subCategory" type="string200" minOccurs="0" nillable="true"/>
+         <xs:element name="rnIncidentRef" type="string200" minOccurs="0" nillable="true"/>
+         <xs:element name="resolutionDueDate" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="iotcsMessageId" type="string100" minOccurs="0" nillable="true"/>
+         <xs:element name="createdDate" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="assetid" type="string20" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="string50">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="50"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string100">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="100"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string20">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="20"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string200">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="200"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

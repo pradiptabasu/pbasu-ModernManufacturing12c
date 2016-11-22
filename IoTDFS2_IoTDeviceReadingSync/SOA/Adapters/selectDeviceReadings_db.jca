@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="selectDeviceReadings" adapter="db" wsdlLocation="../WSDLs/selectDeviceReadings.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory UIConnectionName="IoTDFSDataSource" location="eis/DB/IoTDFSDataSource"/>
+   <endpoint-interaction portType="selectDeviceReadings_ptt" operation="selectDeviceReadings">
+      <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+         <property name="SqlString" value="SELECT IOT_ID,MESSAGE_TYPE,RECIVED_TIME,ISA,JSON_TEXT,GENERATED_TIME,MSG_ID   FROM ( SELECT IOT_ID,MESSAGE_TYPE,RECIVED_TIME,ISA,JSON_TEXT,MSG_ID,GENERATED_TIME,  MAX (GENERATED_TIME) OVER() AS max_created            from Device_Readings  WHERE IoT_ID=#deviceId )  WHERE GENERATED_TIME = max_created"/>
+         <property name="GetActiveUnitOfWork" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

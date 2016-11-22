@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="getContactDetails" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident_SX/getContactDetails" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident_SX/getContactDetails" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/getContactDetails" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plt:partnerLinkType name="getContactDetails_plt">
+      <plt:role name="getContactDetails_role">
+         <plt:portType name="tns:getContactDetails_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getContactDetails" schemaLocation="../Schemas/getContactDetails_table.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="getContactDetailsSelect_inputParameters">
+      <wsdl:part name="getContactDetailsSelect_inputParameters" element="top:getContactDetailsSelect_rnContactIdInputParameters"/>
+   </wsdl:message>
+   <wsdl:message name="DfsContactDetailsViewCollection_msg">
+      <wsdl:part name="DfsContactDetailsViewCollection" element="top:DfsContactDetailsViewCollection"/>
+   </wsdl:message>
+   <wsdl:portType name="getContactDetails_ptt">
+      <wsdl:operation name="getContactDetailsSelect">
+         <wsdl:input message="tns:getContactDetailsSelect_inputParameters"/>
+         <wsdl:output message="tns:DfsContactDetailsViewCollection_msg"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request" targetNamespace="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+   <xsd:element name="IoTSimAlert">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="data_eventtime" type="xsd:integer"/>
+            <xsd:element name="data_motoramperage" type="xsd:double"/>
+            <xsd:element name="data_oilviscosity" type="xsd:double"/>
+            <xsd:element name="data_outputtemp" type="xsd:double"/>
+            <xsd:element name="data_targettemp" type="xsd:double"/>
+            <xsd:element name="data_time" type="xsd:double"/>
+            <xsd:element name="data_vibration" type="xsd:double"/>
+            <xsd:element name="data_category" type="xsd:string"/>
+            <xsd:element name="data_status" type="xsd:string"/>
+            <xsd:element name="data_subject" type="xsd:string"/>
+            <xsd:element name="msg_destination" type="xsd:integer"/>
+            <xsd:element name="msg_id" type="xsd:string"/>
+            <xsd:element name="msg_priority" type="xsd:string"/>
+            <xsd:element name="msg_sender" type="xsd:integer"/>
+            <xsd:element name="msg_source" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

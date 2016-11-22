@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="BatchUpdate" targetNamespace="http://xmlns.oracle.com/DEVICE_READING/ModernManufacturing_IoTBatchUpdate/BatchUpdate" xmlns:tns="http://xmlns.oracle.com/DEVICE_READING/ModernManufacturing_IoTBatchUpdate/BatchUpdate" xmlns:inp1="http://www.example.org" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plnk:partnerLinkType name="BatchUpdate">
+      <plnk:role name="BatchUpdateProvider" portType="tns:BatchUpdate_ptt"/>
+   </plnk:partnerLinkType>
+   <wsdl:types>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="http://www.example.org" schemaLocation="../Schemas/batchUpdate.xsd"/>
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="PostOper_inputMessage">
+      <wsdl:part name="request" element="inp1:BatchUpdateReqMsg"/>
+   </wsdl:message>
+   <wsdl:message name="PostOper_outputMessage">
+      <wsdl:part name="reply" element="inp1:BatchUpdatestatus"/>
+   </wsdl:message>
+   <wsdl:portType name="BatchUpdate_ptt">
+      <wsdl:operation name="PostOper">
+         <wsdl:input message="tns:PostOper_inputMessage"/>
+         <wsdl:output message="tns:PostOper_outputMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="get_ContactInput" type="get_ContactInput"/>
+   <xs:complexType name="get_ContactInput">
+      <xs:sequence>
+         <xs:element name="asset" type="xs:string" nillable="true"/>
+         <xs:element name="asset1" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="get_ContactOutputCollection" type="get_ContactOutputCollection"/>
+   <xs:complexType name="get_ContactOutputCollection">
+      <xs:sequence>
+         <xs:element name="get_ContactOutput" type="get_ContactOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="get_ContactOutput">
+      <xs:sequence>
+         <xs:element name="asset_serial" type="xs:string" nillable="true"/>
+         <xs:element name="asset_id" type="xs:string" nillable="true"/>
+         <xs:element name="rn_locid" type="xs:string" nillable="true"/>
+         <xs:element name="rn_contact" type="xs:string" nillable="true"/>
+         <xs:element name="ISA" type="xs:string" nillable="true"/>
+         <xs:element name="dev_owner" type="xs:string" nillable="true"/>
+         <xs:element name="OrgID" type="xs:string" nillable="true"/>
+         <xs:element name="IOT_ID" type="xs:string" nillable="true"/>
+         <xs:element name="OrgName" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

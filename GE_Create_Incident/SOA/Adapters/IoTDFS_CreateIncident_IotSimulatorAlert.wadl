@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?><application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlns.oracle.com/SOACS/IoTDFS_CreateIncident/IotSimulatorAlert" xmlns:ns0="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="IotSimulatorAlert">RestService</doc>
+   <grammars>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import schemaLocation="../Schemas/IoTDFS_CreateIncident_IotSimAlert.xsd" namespace="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request"/>
+      </xsd:schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import schemaLocation="../Schemas/IoTDFS_CreateIncident_CreateIncident.xsd" namespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident"/>
+      </xsd:schema>
+   </grammars>
+   <resources base="http://oa9086.us.oracle.com:9005/soa-infra/resources/default/IoTDFS_CreateIncident!1.0/IotSimulatorAlert">
+      <resource path="/">
+         <method name="POST" soa:wsdlOperation="Operation_IoTSim">
+            <request>
+               <representation xmlns:cns="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request" mediaType="application/xml" element="cns:IoTSimAlert"/>
+               <representation xmlns:cns="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request" mediaType="application/json" element="cns:IoTSimAlert"/>
+            </request>
+            <response status="200">
+               <representation xmlns:cns="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident" mediaType="application/xml" element="cns:IncidentResponse"/>
+               <representation xmlns:cns="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident" mediaType="application/json" element="cns:IncidentResponse"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

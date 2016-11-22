@@ -1,0 +1,375 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Aug 18 13:15:36 IST 2016
+  Author:  prprshuk
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="IoTDFS2_OTAUpdate"
+               targetNamespace="http://xmlns.oracle.com/SOACS/IoTDFS2_OTAUpdate/IoTDFS2_OTAUpdate"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SOACS/IoTDFS2_OTAUpdate/IoTDFS2_OTAUpdate"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/SOACS/IoTDFS2_OTAUpdate/OTAUpdate"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns2="http://www.example.org"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns3="http://xmlns.oracle.com/SOACS/Project1/BPELProcess1"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS2_OTAUpdate/insertOTARecord"
+         xmlns:ns5="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS2_OTAUpdate/updateExistingIncidents"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/updateExistingIncidents"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/top/insertOTARecord">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/SOACS/Project1/BPELProcess1" location="../Schemas/ProcessVariable.xsd"
+          importType="http://www.w3.org/2001/XMLSchema"/>
+  <import namespace="http://www.example.org" location="../Schemas/IoTDFS2_OTAUpdate.xsd"
+          importType="http://www.w3.org/2001/XMLSchema"/>
+          
+<import location="org.apache.http.client.methods.HttpPut" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.entity.StringEntity" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="java.net.URI" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.client.HttpClient" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.client.HttpClient" importType="http://schemas.oracle.com/bpel/extension/java" />
+<import location="org.apache.http.HttpResponse" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.impl.client.HttpClientBuilder" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.util.EntityUtils" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.HttpEntity" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.conn.ssl.TrustStrategy" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="org.apache.http.impl.client.CloseableHttpClient" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="org.apache.http.conn.ssl.AllowAllHostnameVerifier" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="org.apache.http.conn.ssl.SSLContextBuilder" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="java.security.cert.CertificateException" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="java.security.cert.X509Certificate" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.impl.client.HttpClients" importType="http://schemas.oracle.com/bpel/extension/java"/>
+  <import namespace="http://xmlns.oracle.com/SOACS/IoTDFS2_OTAUpdate/OTAUpdate" location="../WSDLs/OTAUpdate.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="OTAUpdate" partnerLinkType="ns1:OTAUpdate" myRole="OTAUpdateProvider"/>
+    <partnerLink name="insertOTARecord" partnerLinkType="ns4:insertOTARecord_plt" partnerRole="insertOTARecord_role"/>
+    <partnerLink name="ErrorEmail" partnerLinkType="ns5:EmailNotificationProcess"
+                 partnerRole="EmailNotificationProcessProvider"/>
+    <partnerLink name="updateExistingIncidents" partnerLinkType="ns6:updateExistingIncidents_plt"
+                 partnerRole="updateExistingIncidents_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_OTAUpdate_InputVariable" messageType="ns1:OTAUpdate_inputMessage"/>
+    <variable name="replyOutput_OTAUpdate_OutputVariable" messageType="ns1:OTAUpdate_outputMessage"/>
+    <variable name="countBatches" type="xsd:int"/>
+    <variable name="batchLoopIndex" type="xsd:int"/>
+    <variable name="Invoke_InsertRecord_merge_InputVariable" messageType="ns4:DeviceOtaUpdatesCollection_msg"/>
+    <variable name="Invoke_ErrorEmail_process_InputVariable" messageType="ns5:EmailNotificationProcessRequestMessage"/>
+    <variable name="restURL" type="xsd:string"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence4">
+        <assign name="Assign_ErrorInput">
+          <copy>
+            <from>ora:getProcessId()</from>
+            <to>$Invoke_ErrorEmail_process_InputVariable.payload/ns5:processName</to>
+          </copy>
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to>$Invoke_ErrorEmail_process_InputVariable.payload/ns5:processInstanceId</to>
+          </copy>
+          <copy>
+            <from>ora:getFaultAsString()</from>
+            <to>$Invoke_ErrorEmail_process_InputVariable.payload/ns5:errorMessage</to>
+          </copy>
+          <copy>
+            <from>'ErrorEmail'</from>
+            <to>$Invoke_ErrorEmail_process_InputVariable.payload/ns5:emailType</to>
+          </copy>
+          <copy>
+            <from>'Error'</from>
+            <to>$replyOutput_OTAUpdate_OutputVariable.reply/ns2:status</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_ErrorEmail" partnerLink="ErrorEmail"
+                portType="ns5:EmailNotificationProcess" operation="process"
+                inputVariable="Invoke_ErrorEmail_process_InputVariable" bpelx:invokeAsDetail="no"/>
+        <reply name="errorOutput" variable="replyOutput_OTAUpdate_OutputVariable" partnerLink="OTAUpdate"
+               portType="ns1:OTAUpdate_ptt" operation="OTAUpdate"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <sequence name="main">
+    <receive name="Receive1" partnerLink="OTAUpdate" portType="ns1:OTAUpdate_ptt" operation="OTAUpdate"
+             variable="Receive1_OTAUpdate_InputVariable" createInstance="yes"/>
+    <assign name="InitializeGlobalVaribale">
+      <copy>
+        <from>count($Receive1_OTAUpdate_InputVariable.request/ns2:BatchName)</from>
+        <to>$countBatches</to>
+      </copy>
+      <copy>
+        <from>number(1)</from>
+        <to>$batchLoopIndex</to>
+      </copy>
+    </assign>
+    <scope name="Scope_updateOldRecords">
+      <variables>
+        <variable name="Invoke_UpdateExistingRecords_updateExistingIncidents_InputVariable"
+                  messageType="ns6:updateExistingIncidentsInput_msg"/>
+      </variables>
+      <sequence name="Sequence5">
+        <assign name="Assign_IncidentId">
+          <copy>
+            <from>$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[1]/ns2:incidentId</from>
+            <to>$Invoke_UpdateExistingRecords_updateExistingIncidents_InputVariable.updateExistingIncidentsInput_msg/ns7:incidentId</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_UpdateExistingRecords" bpelx:invokeAsDetail="no" partnerLink="updateExistingIncidents"
+                portType="ns6:updateExistingIncidents_ptt" operation="updateExistingIncidents"
+                inputVariable="Invoke_UpdateExistingRecords_updateExistingIncidents_InputVariable"/>
+        <extensionActivity>
+          <bpelx:dehydrate name="Dehydrate_CommitUpdate"/>
+        </extensionActivity>
+      </sequence>
+    </scope>
+    <forEach parallel="no" counterName="ForEach1Counter" name="ForEach_Batch">
+      <startCounterValue>$batchLoopIndex</startCounterValue>
+      <finalCounterValue>$countBatches</finalCounterValue>
+      <scope name="Scope1">
+        <variables>
+          <variable name="countDevices" type="xsd:int"/>
+          <variable name="deviceLoopIndex" type="xsd:int"/>
+        </variables>
+        <sequence name="Sequence1">
+          <assign name="InitializeLocalVaribale">
+            <copy>
+              <from>count($Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:deviceID)</from>
+              <to>$countDevices</to>
+            </copy>
+            <copy>
+              <from>number(1)</from>
+              <to>$deviceLoopIndex</to>
+            </copy>
+          </assign>
+          <forEach parallel="no" counterName="ForEach1Counter" name="ForEach_Devices">
+            <startCounterValue>$deviceLoopIndex</startCounterValue>
+            <finalCounterValue>$countDevices</finalCounterValue>
+            <scope name="Scope2">
+              <variables>
+                <variable name="deviceNo" type="xsd:int"/>
+                <variable name="appId" type="xsd:string"/>
+                <variable name="msgFormat" type="xsd:string"/>
+                <variable name="attribute" type="xsd:string"/>
+                <variable name="id" type="xsd:string"/>
+                <variable name="iotURL" type="xsd:string"/>
+                <variable name="value" type="xsd:string"/>
+                <variable name="temporaryDeviceVaribale" element="ns2:BatchUpdateReqMsg"/>
+                <variable name="processvariable" element="ns3:processVariable"/>
+                <variable name="isa" type="xsd:string"/>
+              </variables>
+              <sequence name="Sequence2">
+                <assign name="FindISAName">
+                  <copy>
+                    <from>ora:getPreference("ISA")</from>
+                    <to>$isa</to>
+                  </copy>
+                  <copy>
+                    <from>$batchLoopIndex</from>
+                    <to>$processvariable/ns3:batchLoopIndex</to>
+                  </copy>
+                  <copy>
+                    <from>$deviceLoopIndex</from>
+                    <to>$processvariable/ns3:deviceLoopIndex</to>
+                  </copy>
+                </assign>
+                <assign name="Assign_RESTInput">
+                  <copy>
+                    <from>$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:deviceID[$deviceLoopIndex]</from>
+                    <to>$deviceNo</to>
+                  </copy>
+                  <copy>
+                    <from>$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:attribute[$deviceLoopIndex]</from>
+                    <to>$attribute</to>
+                  </copy>
+                  <copy>
+                    <from>dvm:lookupValue('oramds:/apps/DVM/BatchUpdate.dvm','industryType',$isa,'appId','0')</from>
+                    <to>$appId</to>
+                  </copy>
+                  <copy>
+                    <from>dvm:lookupValue('oramds:/apps/DVM/BatchUpdateMsgformat.dvm','IndustryType',$isa,'MsgFormat','0')</from>
+                    <to>$msgFormat</to>
+                  </copy>
+                  <copy>
+                    <from>$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:deviceID[$deviceLoopIndex]</from>
+                    <to>$id</to>
+                  </copy>
+                  <copy>
+                    <from>ora:getPreference("IoTURL")</from>
+                    <to>$iotURL</to>
+                  </copy>
+                </assign>
+                <assign name="Transformation_CreateMetaData">
+                  <bpelx:annotation>
+                    <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+                  </bpelx:annotation>
+                  <copy>
+                    <from>ora:doXSLTransformForDoc("../Transformations/Transformation_CreateTempVariable.xsl", $Receive1_OTAUpdate_InputVariable.request, "processvariable", $processvariable)</from>
+                    <to variable="temporaryDeviceVaribale"/>
+                  </copy>
+                </assign>
+                <if name="If1">
+                  <documentation>
+                    <![CDATA[ExecuteOTAUpdate]]>
+                  </documentation>
+                  <condition>(xp20:upper-case($temporaryDeviceVaribale/ns2:BatchName/ns2:operation)='EXECUTE') and (ora:getPreference('CallIoTAPI')='Y')</condition>
+                  <sequence>
+                    <assign name="PopulateAdditionalInput">
+                      <copy>
+                        <from>$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:attribute</from>
+                        <to>$attribute</to>
+                      </copy>
+                      <copy>
+                        <from>$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:value</from>
+                        <to>$value</to>
+                      </copy>
+                    </assign>
+                    <extensionActivity>
+                      <bpelx:exec name="Java_Embedding1" language="java">
+                        <![CDATA[try{      
+String ioturl=(java.lang.String)getVariableData("iotURL");   
+String appid=(java.lang.String)getVariableData("appId");   
+String id = (java.lang.String)getVariableData("id");   
+String msgformat=(java.lang.String)getVariableData("msgFormat");   
+String attribute = (java.lang.String)getVariableData("attribute");          
+String value=(java.lang.String)getVariableData("value");         
+//String uriStr="http://oa9095.us.oracle.com:7101/iot/api/v1/endpoints/"+id+"/resources/"+attribute;      
+//String uriStr=ioturl+id+"/resources/"+attribute;     
+String uriStr=ioturl+appid+"/devices/"+id+"/deviceModels/"+msgformat+"/attributes/"+attribute;      
+java.net.URI uri= new URI(uriStr);          
+addAuditTrailEntry("REST URI:"+uri);                
+//String bodyVar="{\""+attribute+"\":\""+value+"\"}";     
+String bodyVar="{\"value\":"+value+"}";       
+addAuditTrailEntry("body >>"+bodyVar);               
+org.apache.http.entity.StringEntity  bodyParams= new StringEntity(bodyVar);          
+addAuditTrailEntry("body params>>"+bodyParams);         
+org.apache.http.client.methods.HttpPut httpPost= new HttpPut(uri);                  
+httpPost.addHeader("Authorization", "Basic aW90OndlbGNvbWUx");               
+httpPost.addHeader("Content-Type", "application/json");                  
+httpPost.addHeader("Accept", "application/json");                  
+httpPost.setEntity(bodyParams);          
+CloseableHttpClient httpClient = org.apache.http.impl.client.HttpClients.custom().setSSLHostnameVerifier(new AllowAllHostnameVerifier()).setSslcontext(new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy(){public boolean isTrusted(X509Certificate[] arg0, String arg1) throws CertificateException{return true;}}).build()).build();             
+org.apache.http.HttpResponse response = httpClient.execute(httpPost);               
+addAuditTrailEntry("response:"+response);                
+HttpEntity entity = response.getEntity();               
+String responseString = EntityUtils.toString(entity);               
+addAuditTrailEntry("output:"+responseString);    
+}                  
+catch(Exception e)                             
+{              
+    addAuditTrailEntry("Exceeption");              
+     e.printStackTrace();             
+}]]>
+                      </bpelx:exec>
+                    </extensionActivity>
+                  </sequence>
+                  <else>
+                    <empty name="NoOTAEcecutionRequired"/>
+                  </else>
+                </if>
+                <wait name="Wait">
+                  <for>ora:getPreference("TimeDelay")</for>
+                </wait>
+                <assign name="Assign_restURL">
+                  <copy>
+                    <from>concat(ora:getPreference('IoTURI'),$appId,'/devices/',$id,'/deviceModels/',$msgFormat,'/attributes/',$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:attribute )</from>
+                    <to>$processvariable/ns3:restURI</to>
+                  </copy>
+                </assign>
+                <if name="If2">
+                  <condition>string($Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:attribute)!=''</condition>
+                  <assign name="Assign_RESTInput">
+                    <copy>
+                      <from>$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:deviceID[$deviceLoopIndex]</from>
+                      <to>$deviceNo</to>
+                    </copy>
+                    <copy>
+                      <from>dvm:lookupValue('oramds:/apps/DVM/BatchUpdate.dvm','industryType',$isa,'appId','0')</from>
+                      <to>$appId</to>
+                    </copy>
+                    <copy>
+                      <from>dvm:lookupValue('oramds:/apps/DVM/BatchUpdateMsgformat.dvm','IndustryType',$isa,'MsgFormat','0')</from>
+                      <to>$msgFormat</to>
+                    </copy>
+                    <copy>
+                      <from>$Receive1_OTAUpdate_InputVariable.request/ns2:BatchName[$batchLoopIndex]/ns2:deviceID[$deviceLoopIndex]</from>
+                      <to>$id</to>
+                    </copy>
+                    <copy>
+                      <from>ora:getPreference("IoTURL")</from>
+                      <to>$iotURL</to>
+                    </copy>
+                  </assign>
+                  <else>
+                    <assign name="Assign_NULL">
+                      <copy>
+                        <from>string('')</from>
+                        <to>$processvariable/ns3:restURI</to>
+                      </copy>
+                    </assign>
+                  </else>
+                </if>
+                <assign name="Transformation_InsertOTAUpdate">
+                  <bpelx:annotation>
+                    <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+                  </bpelx:annotation>
+                  <copy>
+                    <from>ora:doXSLTransformForDoc("../Transformations/Transformation_InsertOTAUpdate.xsl", $temporaryDeviceVaribale, "processvariable", $processvariable)</from>
+                    <to variable="Invoke_InsertRecord_merge_InputVariable" part="DeviceOtaUpdatesCollection"/>
+                  </copy>
+                </assign>
+                <invoke name="Invoke_InsertRecord" bpelx:invokeAsDetail="no" partnerLink="insertOTARecord"
+                        portType="ns4:insertOTARecord_ptt" operation="merge"
+                        inputVariable="Invoke_InsertRecord_merge_InputVariable"/>
+              </sequence>
+            </scope>
+          </forEach>
+          <assign name="IncreaseBatchCounter">
+            <copy>
+              <from>$batchLoopIndex+1</from>
+              <to>$batchLoopIndex</to>
+            </copy>
+          </assign>
+        </sequence>
+      </scope>
+    </forEach>
+    <assign name="Assign_Output">
+      <copy>
+        <from>"Success"</from>
+        <to>$replyOutput_OTAUpdate_OutputVariable.reply/ns2:status</to>
+      </copy>
+      <copy>
+        <from>"Batch would be updated shortly."</from>
+        <to>$replyOutput_OTAUpdate_OutputVariable.reply/ns2:statusMessage</to>
+      </copy>
+    </assign>
+    <reply name="replyOutput" variable="replyOutput_OTAUpdate_OutputVariable" partnerLink="OTAUpdate"
+           portType="ns1:OTAUpdate_ptt" operation="OTAUpdate"/>
+  </sequence>
+</process>

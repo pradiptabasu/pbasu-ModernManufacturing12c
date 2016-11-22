@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.oracle.com/isg/ModernMfg/GE/CreateIncident" targetNamespace="http://www.oracle.com/isg/ModernMfg/GE/CreateIncident" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+   <xsd:element name="GECreateIncidentRequest">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="payload">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="data">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="data_subject" type="xsd:string"/>
+                              <xsd:element name="msg_priority" type="xsd:string"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

@@ -1,0 +1,521 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Feb 18 15:15:03 IST 2016
+  Author:  abelur
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CreateIncident"
+               targetNamespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/CreateIncident"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/CreateIncident"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/Incident"
+         xmlns:ns2="urn:wsdl.ws.rightnow.com/v1_3" xmlns:ns3="urn:messages.ws.rightnow.com/v1_3"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns4="urn:base.ws.rightnow.com/v1_3"
+         xmlns:ns5="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/AlertIncident"
+         xmlns:ns6="urn:faults.ws.rightnow.com/v1_3"
+         xmlns:ns7="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/DeviceAlert"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident_SX/insert_CRM_Incident"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/top/insert_CRM_Incident"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident_SX/get_Contact"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact"
+         xmlns:ns12="http://TargetNamespace.com/DeviceAlert_Alert_request" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns13="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/IotSimulatorAlert"
+         xmlns:ns14="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request"
+         xmlns:ns15="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess"
+         xmlns:ns16="http://xmlns.oracle.com/SOACS/IoTDFS_CreateIncident_SX/CustomerIncident"
+         xmlns:ns17="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident_SX/getContactDetails"
+         xmlns:ns18="http://xmlns.oracle.com/pcbpel/adapter/db/top/getContactDetails"
+         xmlns:ns19="http://TargetNamespace.com/CustomerIncident_CreateCustomerIncident_request"
+         xmlns:ns20="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_CreateIncident_SX/QueryRNLookup"
+         xmlns:ns21="http://xmlns.oracle.com/SOACS/IoTDFS_CreateIncident_SX/IotSimulatorAlert">
+
+    <!--import ui:processWSDL="true" namespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/CreateIncident" location="../WSDLs/CreateIncident.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/-->
+  <import namespace="urn:faults.ws.rightnow.com/v1_3" location="oramds:/apps/Schemas/soap_xsd_faults.xsd"
+          importType="http://www.w3.org/2001/XMLSchema"/>
+  <import namespace="urn:messages.ws.rightnow.com/v1_3" location="oramds:/apps/Schemas/soap_xsd_messagestyped.xsd"
+          importType="http://www.w3.org/2001/XMLSchema"/>
+  <import namespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/Incident" location="../WSDLs/Incident.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="Incident" partnerLinkType="ns1:Incident" myRole="IncidentProvider"/>
+    <partnerLink name="DeviceAlert" partnerLinkType="ns7:DeviceAlert" myRole="DeviceAlertProvider"/>
+    <partnerLink name="insert_CRM_Incident" partnerLinkType="ns8:insert_CRM_Incident_plt"
+                 partnerRole="insert_CRM_Incident_role"/>
+    <partnerLink name="get_Contact" partnerLinkType="ns10:get_Contact_plt" partnerRole="get_Contact_role"/>
+    <partnerLink name="Error_Email" partnerLinkType="ns15:EmailNotificationProcess"
+                 partnerRole="EmailNotificationProcessProvider"/>
+    <partnerLink name="CustomerIncident" partnerLinkType="ns16:CustomerIncident" myRole="CustomerIncidentProvider"/>
+    <partnerLink name="getContactDetails" partnerLinkType="ns17:getContactDetails_plt"
+                 partnerRole="getContactDetails_role"/>
+    <partnerLink name="QueryRNLookup" partnerLinkType="ns20:QueryRNLookup_plt" partnerRole="QueryRNLookup_role"/>
+    <partnerLink name="CreateIncident_RN" partnerLinkType="ns2:CreateIncident_RN" partnerRole="RightNowSyncPort"/>
+    <partnerLink name="IotSimulatorAlert" partnerLinkType="ns21:IotSimulatorAlert" myRole="IotSimulatorAlertProvider"/>
+  </partnerLinks>
+  <variables>
+    <variable name="receiveInput_CreateIncident_InputVariable" messageType="ns1:CreateIncident_inputMessage"/>
+    <variable name="replyOutput_CreateIncident_OutputVariable" messageType="ns1:CreateIncident_outputMessage"/>
+    <variable name="Invoke_CreateIncident_InputVariable" messageType="ns2:CreateRequest"/>
+    <variable name="Invoke_CreateIncident_OutputVariable" messageType="ns2:CreateResponse"/>
+    <variable name="Header_Var" element="ns3:ClientInfoHeader"/>
+    <variable name="FVariable1" element="ns6:RequestErrorFault"/>
+    <variable name="OnMessage_AlertData_InputVariable" messageType="ns7:Alert_inputMessage"/>
+    <variable name="Invoke_ReslDate_InputVariable" messageType="ns2:QueryCSVRequest"/>
+    <variable name="Invoke_ReslDate_OutputVariable" messageType="ns2:QueryCSVResponse"/>
+    <variable name="Invoke_insert_CRM_incident_InputVariable" messageType="ns8:CrmIncidentCollection_msg"/>
+    <variable name="Invoke_getIncident_InputVariable" messageType="ns2:GetRequest"/>
+    <variable name="Invoke_getIncident_OutputVariable" messageType="ns2:GetResponse"/>
+    <variable name="Invoke_getContact_InputVariable" messageType="ns10:get_ContactInput_msg"/>
+    <variable name="Invoke_getContact_OutputVariable" messageType="ns10:get_ContactOutputCollection_msg"/>
+    <variable name="FaultName" type="xsd:string"/>
+    <variable name="Title" type="xsd:string"/>
+    <variable name="Invoke_Error_Email_InputVariable" messageType="ns15:EmailNotificationProcessRequestMessage"/>
+    <variable name="Invoke_getContactDetailsSelect_InputVariable"
+              messageType="ns17:getContactDetailsSelect_inputParameters"/>
+    <variable name="Invoke_getContactDetailsSelect_OutputVariable"
+              messageType="ns17:DfsContactDetailsViewCollection_msg"/>
+    <variable name="OnMessage_CreateCustomerIncident_InputVariable"
+              messageType="ns16:CreateCustomerIncident_inputMessage"/>
+    <variable name="replyCustomerIncidentOutput_OutputVariable"
+              messageType="ns16:CreateCustomerIncident_outputMessage"/>
+    <variable name="replyIoTResponse_Alert_OutputVariable" messageType="ns7:Alert_outputMessage"/>
+    <variable name="ReplySEResponse_OutputVariable" messageType="ns21:Operation_IoTSim_outputMessage"/>
+    <variable name="OnMessage_IoTSim_InputVariable" messageType="ns21:Operation_IoTSim_inputMessage"/>
+  </variables>
+  <faultHandlers>
+    <!--catch bpelx:name="ReqF" faultName="ns2:RequestErrorFault" faultVariable="FVariable1"
+           faultElement="ns6:RequestErrorFault">
+      <sequence name="Sequence1">
+        <assign name="Assign_RequestError">
+          <copy>
+            <from>$FVariable1/ns6:exceptionMessage</from>
+            <to>$replyOutput_CreateIncident_OutputVariable.reply/client:result</to>
+          </copy>
+        </assign>
+        <reply name="Reply_Error" variable="replyOutput_CreateIncident_OutputVariable" partnerLink="Incident"
+               portType="ns1:Incident_ptt" operation="CreateIncident"/>
+      </sequence>
+    </catch-->
+    <catchAll>
+      <sequence name="Sequence3">
+        <assign name="Assign_Fault">
+          <copy>
+            <from>ora:getFaultName()</from>
+            <to>$FaultName</to>
+          </copy>
+          <copy>
+            <from>ora:getProcessId()</from>
+            <to>$Invoke_Error_Email_InputVariable.payload/ns15:processName</to>
+          </copy>
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to>$Invoke_Error_Email_InputVariable.payload/ns15:processInstanceId</to>
+          </copy>
+          <copy>
+            <from>'ErrorEmail'</from>
+            <to>$Invoke_Error_Email_InputVariable.payload/ns15:emailType</to>
+          </copy>
+          <copy>
+            <from>ora:getFaultAsString()</from>
+            <to>$Invoke_Error_Email_InputVariable.payload/ns15:errorMessage</to>
+          </copy>
+          <copy>
+            <from>concat($FaultName,' : Contact the dev team')</from>
+            <to>$replyOutput_CreateIncident_OutputVariable.reply/client:result</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_Error_Email" bpelx:invokeAsDetail="no" partnerLink="Error_Email"
+                portType="ns15:EmailNotificationProcess" operation="process"
+                inputVariable="Invoke_Error_Email_InputVariable"/>
+        <scope name="Scope_Reply_Error_Msg">
+          <if name="CreateIncident">
+            <condition>$Header_Var/ns3:AppID='APP'</condition>
+            <sequence name="Sequence8">
+              <assign name="Assign_CI_Input">
+                <copy>
+                  <from>'An error has occurred. Please try after sometime.'</from>
+                  <to>$replyOutput_CreateIncident_OutputVariable.reply/client:result</to>
+                </copy>
+              </assign>
+              <reply name="Reply_CI_Error" variable="replyOutput_CreateIncident_OutputVariable" partnerLink="Incident"
+                     portType="ns1:Incident_ptt" operation="CreateIncident"/>
+            </sequence>
+            <elseif>
+              <condition>$Header_Var/ns3:AppID='App1'</condition>
+              <sequence name="Sequence9">
+                <assign name="Assign_IoT_Input">
+                  <copy>
+                    <from>'An error has occurred. Please try after sometime.'</from>
+                    <to>$replyIoTResponse_Alert_OutputVariable.reply/client:result</to>
+                  </copy>
+                </assign>
+                <reply name="Reply_IOT_Error" variable="replyIoTResponse_Alert_OutputVariable" partnerLink="DeviceAlert"
+                       portType="ns7:DeviceAlert_ptt" operation="Alert"/>
+              </sequence>
+            </elseif>
+            <elseif>
+              <condition>$Header_Var/ns3:AppID='App2'</condition>
+              <sequence name="Sequence10">
+                <assign name="Assign_SX_Input">
+                  <copy>
+                    <from>'An error has occurred. Please try after sometime.'</from>
+                    <to>$ReplySEResponse_OutputVariable.reply/client:result</to>
+                  </copy>
+                </assign>
+                <reply name="Reply_SX_Error" variable="ReplySEResponse_OutputVariable" partnerLink="IotSimulatorAlert"
+                       portType="ns21:IotSimulatorAlert_ptt" operation="Operation_IoTSim"/>
+              </sequence>
+            </elseif>
+            <elseif>
+              <condition>$Header_Var/ns3:AppID='App3'</condition>
+              <sequence name="Sequence11">
+                <assign name="Assign_CustInc_Input">
+                  <copy>
+                    <from>'An error has occurred. Please try after sometime.'</from>
+                    <to>$replyCustomerIncidentOutput_OutputVariable.reply/client:result</to>
+                  </copy>
+                </assign>
+                <reply name="Reply_CustInc_Error" variable="replyCustomerIncidentOutput_OutputVariable"
+                       partnerLink="CustomerIncident" portType="ns16:CustomerIncident_ptt"
+                       operation="CreateCustomerIncident"/>
+              </sequence>
+            </elseif>
+            <else>
+              <empty name="DoNothing"/>
+            </else>
+          </if>
+        </scope>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in CreateIncident.wsdl) -->
+    <pick name="Pick" createInstance="yes">
+      <onMessage variable="receiveInput_CreateIncident_InputVariable" partnerLink="Incident"
+                 portType="ns1:Incident_ptt" operation="CreateIncident" bpelx:name="UI">
+        <sequence>
+          <assign name="Assign_Header_getOrg">
+            <copy>
+              <from>"APP"</from>
+              <to>$Header_Var/ns3:AppID</to>
+            </copy>
+            <copy>
+              <from>$receiveInput_CreateIncident_InputVariable.request/client:Asset</from>
+              <to>$Invoke_getContact_InputVariable.get_ContactInput_msg/ns11:asset1</to>
+            </copy>
+            <copy>
+              <from>$receiveInput_CreateIncident_InputVariable.request/client:Asset</from>
+              <to>$Invoke_getContact_InputVariable.get_ContactInput_msg/ns11:asset</to>
+            </copy>
+            <copy>
+              <from>ora:setCompositeInstanceTitle("From ADF")</from>
+              <to>$Title</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_getOrg" partnerLink="get_Contact" portType="ns10:get_Contact_ptt"
+                  operation="get_Contact" inputVariable="Invoke_getContact_InputVariable"
+                  outputVariable="Invoke_getContact_OutputVariable" bpelx:invokeAsDetail="no"/>
+          <assign name="Xform_CreateIncident">
+            <bpelx:annotation>
+              <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+              <from>ora:doXSLTransformForDoc("../Transformations/Xform_CreateIncident.xsl", $receiveInput_CreateIncident_InputVariable.request, "Invoke_getContact_OutputVariable.get_ContactOutputCollection", $Invoke_getContact_OutputVariable.get_ContactOutputCollection)</from>
+              <to variable="Invoke_CreateIncident_InputVariable" part="parameters"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_CreateIncident" partnerLink="CreateIncident_RN" portType="ns2:RightNowSyncPort"
+                  operation="Create" inputVariable="Invoke_CreateIncident_InputVariable"
+                  outputVariable="Invoke_CreateIncident_OutputVariable" bpelx:invokeAsDetail="no"
+                  bpelx:inputHeaderVariable="Header_Var"/>
+        </sequence>
+      </onMessage>
+      <onMessage bpelx:name="DeviceAlert" variable="OnMessage_AlertData_InputVariable" partnerLink="DeviceAlert"
+                 portType="ns7:DeviceAlert_ptt" operation="Alert">
+        <sequence name="Sequence2">
+          <assign name="Assign_Header_getOrg">
+            <copy>
+              <from>"App1"</from>
+              <to>$Header_Var/ns3:AppID</to>
+            </copy>
+            <copy>
+              <from>ora:setCompositeInstanceTitle(string('FROM IOT'))</from>
+              <to>$Title</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_AlertData_InputVariable.request/ns12:source</from>
+              <to>$Invoke_getContact_InputVariable.get_ContactInput_msg/ns11:asset</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_AlertData_InputVariable.request/ns12:source</from>
+              <to>$Invoke_getContact_InputVariable.get_ContactInput_msg/ns11:asset1</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_getOrg" partnerLink="get_Contact"
+                  portType="ns10:get_Contact_ptt" operation="get_Contact"
+                  inputVariable="Invoke_getContact_InputVariable" outputVariable="Invoke_getContact_OutputVariable"
+                  bpelx:invokeAsDetail="no"/>
+          <assign name="Assign1">
+            <copy>
+              <from>concat("select lookup_code from DFS_RN_LOOKUPS where lookup_value=&amp;apos;Severe&amp;apos; and isa='",$Invoke_getContact_OutputVariable.get_ContactOutputCollection/ns11:get_ContactOutput/ns11:ISA,"'")</from>
+              <to>$Invoke_CreateIncident_InputVariable.parameters/ns3:ProcessingOptions/ns3:SuppressRules</to>
+            </copy>
+          </assign>
+          <assign name="Xform_createIncident_IoTAlert">
+            <bpelx:annotation>
+              <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+              <from>ora:doXSLTransformForDoc("../Transformations/Xform_createIncident_Alert.xsl", $OnMessage_AlertData_InputVariable.request, "Invoke_getContact_OutputVariable.get_ContactOutputCollection", $Invoke_getContact_OutputVariable.get_ContactOutputCollection)</from>
+              <to variable="Invoke_CreateIncident_InputVariable" part="parameters"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_Create_Incident_IoTAlert" partnerLink="CreateIncident_RN"
+                  portType="ns2:RightNowSyncPort" operation="Create"
+                  inputVariable="Invoke_CreateIncident_InputVariable"
+                  outputVariable="Invoke_CreateIncident_OutputVariable" bpelx:invokeAsDetail="no"
+                  bpelx:inputHeaderVariable="Header_Var"/>
+        </sequence>
+      </onMessage>
+      <onMessage bpelx:name="IoTsimAlert" variable="OnMessage_IoTSim_InputVariable" partnerLink="IotSimulatorAlert"
+                 portType="ns21:IotSimulatorAlert_ptt" operation="Operation_IoTSim">
+        <sequence name="Sequence4">
+          <assign name="Assign_Header_IoTSim">
+            <copy>
+              <from>$OnMessage_IoTSim_InputVariable.request/ns14:msg_source</from>
+              <to>$Invoke_getContact_InputVariable.get_ContactInput_msg/ns11:asset</to>
+            </copy>
+            <copy>
+              <from>"App2"</from>
+              <to>$Header_Var/ns3:AppID</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_IoTSim_InputVariable.request/ns14:msg_source</from>
+              <to>$Invoke_getContact_InputVariable.get_ContactInput_msg/ns11:asset1</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_getOrg" partnerLink="get_Contact" portType="ns10:get_Contact_ptt"
+                  operation="get_Contact" inputVariable="Invoke_getContact_InputVariable"
+                  outputVariable="Invoke_getContact_OutputVariable" bpelx:invokeAsDetail="no"
+                  bpelx:inputHeaderVariable="Header_Var"/>
+          <assign name="Xform_createIncident_IotSimAlert">
+            <bpelx:annotation>
+              <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+              <from>ora:doXSLTransformForDoc("../Transformations/Xform_createIncident_IotSimAlert.xsl", $OnMessage_IoTSim_InputVariable.request, "Invoke_getContact_OutputVariable.get_ContactOutputCollection", $Invoke_getContact_OutputVariable.get_ContactOutputCollection)</from>
+              <to variable="Invoke_CreateIncident_InputVariable" part="parameters"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_CreateIncident_IoTSimAlert" partnerLink="CreateIncident_RN"
+                  portType="ns2:RightNowSyncPort" operation="Create"
+                  inputVariable="Invoke_CreateIncident_InputVariable"
+                  outputVariable="Invoke_CreateIncident_OutputVariable" bpelx:invokeAsDetail="no"
+                  bpelx:inputHeaderVariable="Header_Var"/>
+        </sequence>
+      </onMessage>
+      <onMessage variable="OnMessage_CreateCustomerIncident_InputVariable" partnerLink="CustomerIncident"
+                 portType="ns16:CustomerIncident_ptt" operation="CreateCustomerIncident">
+        <sequence name="Sequence5">
+          <assign name="Assign_RNContactId">
+            <copy>
+              <from>$OnMessage_CreateCustomerIncident_InputVariable.request/ns19:Contact</from>
+              <to>$Invoke_getContactDetailsSelect_InputVariable.getContactDetailsSelect_inputParameters/ns18:rnContactId</to>
+            </copy>
+            <copy>
+              <from>"App3"</from>
+              <to>$Header_Var/ns3:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_getContactDetails" bpelx:invokeAsDetail="no" partnerLink="getContactDetails"
+                  portType="ns17:getContactDetails_ptt" operation="getContactDetailsSelect"
+                  inputVariable="Invoke_getContactDetailsSelect_InputVariable"
+                  outputVariable="Invoke_getContactDetailsSelect_OutputVariable"/>
+          <assign name="Xform_createIncident_WithoutAsset">
+            <bpelx:annotation>
+              <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+              <from>ora:doXSLTransformForDoc("../Transformations/Xform_createIncident_withoutAsset.xsl", $OnMessage_CreateCustomerIncident_InputVariable.request, "Invoke_getContactDetailsSelect_OutputVariable.DfsContactDetailsViewCollection", $Invoke_getContactDetailsSelect_OutputVariable.DfsContactDetailsViewCollection)</from>
+              <to variable="Invoke_CreateIncident_InputVariable" part="parameters"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_CreateIncident_Customeer_Input" partnerLink="CreateIncident_RN"
+                  portType="ns2:RightNowSyncPort" operation="Create"
+                  inputVariable="Invoke_CreateIncident_InputVariable"
+                  outputVariable="Invoke_CreateIncident_OutputVariable" bpelx:invokeAsDetail="no"
+                  bpelx:inputHeaderVariable="Header_Var"/>
+        </sequence>
+      </onMessage>
+    </pick>
+    <assign name="Assign_IncidentID">
+      <copy>
+        <from>concat("select MilestoneInstances.IncidentMilestoneInstanceList.ResolutionDueTime from Incident where ID=",$Invoke_CreateIncident_OutputVariable.parameters/ns3:RNObjectsResult/ns3:RNObjects/ns4:ID/@id)</from>
+        <to>$Invoke_ReslDate_InputVariable.parameters/ns3:Query</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke_ResolutionDate" partnerLink="CreateIncident_RN" portType="ns2:RightNowSyncPort"
+            operation="QueryCSV" inputVariable="Invoke_ReslDate_InputVariable"
+            outputVariable="Invoke_ReslDate_OutputVariable" bpelx:invokeAsDetail="no"
+            bpelx:inputHeaderVariable="Header_Var"/>
+    <assign name="Xform_getIncident">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/Transformation_getIncident.xsl", $Invoke_CreateIncident_OutputVariable.parameters)</from>
+        <to variable="Invoke_getIncident_InputVariable" part="parameters"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_getIncident_info" partnerLink="CreateIncident_RN" portType="ns2:RightNowSyncPort" operation="Get"
+            inputVariable="Invoke_getIncident_InputVariable" outputVariable="Invoke_getIncident_OutputVariable"
+            bpelx:invokeAsDetail="no" bpelx:inputHeaderVariable="Header_Var"/>
+    <scope name="Scope_InsertIncidentDetails">
+      <sequence>
+        <if name="If">
+          <condition>$Header_Var/ns3:AppID!='App3'</condition>
+          <assign name="Xform_insert_CRM_Incident">
+            <bpelx:skipCondition>$Header_Var/ns3:AppID='App3'</bpelx:skipCondition>
+            <bpelx:annotation>
+              <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+              <from>ora:doXSLTransformForDoc("../Transformations/Xform_insert_CRM_Incident.xsl", $OnMessage_AlertData_InputVariable.request, "Invoke_CreateIncident_OutputVariable.parameters", $Invoke_CreateIncident_OutputVariable.parameters, "Invoke_ReslDate_OutputVariable.parameters", $Invoke_ReslDate_OutputVariable.parameters, "Invoke_getIncident_OutputVariable.parameters", $Invoke_getIncident_OutputVariable.parameters, "Invoke_getContact_OutputVariable.get_ContactOutputCollection", $Invoke_getContact_OutputVariable.get_ContactOutputCollection, "OnMessage_IoTSim_InputVariable.request", $OnMessage_IoTSim_InputVariable.request)</from>
+              <to variable="Invoke_insert_CRM_incident_InputVariable" part="CrmIncidentCollection"/>
+            </copy>
+          </assign>
+          <else>
+            <assign name="Xform_insert_CRM_Incident">
+              <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+              </bpelx:annotation>
+              <copy>
+                <from>ora:doXSLTransformForDoc("../Transformations/Xform_insert_CUST_Incident.xsl", $OnMessage_CreateCustomerIncident_InputVariable.request, "Invoke_CreateIncident_OutputVariable.parameters", $Invoke_CreateIncident_OutputVariable.parameters, "Invoke_getIncident_OutputVariable.parameters", $Invoke_getIncident_OutputVariable.parameters, "Invoke_ReslDate_OutputVariable.parameters", $Invoke_ReslDate_OutputVariable.parameters, "Invoke_getContactDetailsSelect_OutputVariable.DfsContactDetailsViewCollection", $Invoke_getContactDetailsSelect_OutputVariable.DfsContactDetailsViewCollection)</from>
+                <to variable="Invoke_insert_CRM_incident_InputVariable" part="CrmIncidentCollection"/>
+              </copy>
+            </assign>
+          </else>
+        </if>
+        <invoke name="Invoke_insert_CRM_incident" bpelx:invokeAsDetail="no" partnerLink="insert_CRM_Incident"
+                portType="ns8:insert_CRM_Incident_ptt" operation="insert"
+                inputVariable="Invoke_insert_CRM_incident_InputVariable"/>
+      </sequence>
+    </scope>
+    <assign name="Assign_output">
+      <copy>
+        <from>concat($Invoke_getIncident_OutputVariable.parameters/ns3:RNObjectsResult/ns3:RNObjects/ns4:LookupName,': Incident created successfully')</from>
+        <to>$replyOutput_CreateIncident_OutputVariable.reply/client:result</to>
+      </copy>
+      <copy>
+        <from>concat($Invoke_getIncident_OutputVariable.parameters/ns3:RNObjectsResult/ns3:RNObjects/ns4:LookupName,': Incident created successfully')</from>
+        <to>$replyIoTResponse_Alert_OutputVariable.reply/client:result</to>
+      </copy>
+      <copy>
+        <from>concat($Invoke_getIncident_OutputVariable.parameters/ns3:RNObjectsResult/ns3:RNObjects/ns4:LookupName,': Incident created successfully')</from>
+        <to>$replyCustomerIncidentOutput_OutputVariable.reply/client:result</to>
+      </copy>
+    </assign>
+    <scope name="Scope_Process_response">
+      <if name="If_Response">
+        <condition>$Header_Var/ns3:AppID='APP'</condition>
+        <reply name="replyIncidentOutput" partnerLink="Incident" portType="ns1:Incident_ptt" operation="CreateIncident"
+               variable="replyOutput_CreateIncident_OutputVariable">
+          <bpelx:skipCondition>$Header_Var/ns3:AppID='App1' or $Header_Var/ns3:AppID='App2'</bpelx:skipCondition>
+        </reply>
+        <elseif>
+          <condition>$Header_Var/ns3:AppID='App1' or $Header_Var/ns3:AppID='App2'</condition>
+          <sequence name="Sequence6">
+            <reply name="replyIoTResponse" partnerLink="DeviceAlert" portType="ns7:DeviceAlert_ptt" operation="Alert"
+                   variable="replyIoTResponse_Alert_OutputVariable">
+              <bpelx:skipCondition>$Header_Var/ns3:AppID='App2'</bpelx:skipCondition>
+            </reply>
+            <scope name="Scope1">
+              <bpelx:skipCondition>$Header_Var/ns3:AppID='App1'</bpelx:skipCondition>
+              <sequence name="Sequence7">
+                <assign name="Assign_Response">
+                  <copy>
+                    <from>concat($Invoke_getIncident_OutputVariable.parameters/ns3:RNObjectsResult/ns3:RNObjects/ns4:LookupName,': Incident created successfully')</from>
+                    <to>$ReplySEResponse_OutputVariable.reply/client:result</to>
+                  </copy>
+                </assign>
+                <reply name="ReplySEResponse" variable="ReplySEResponse_OutputVariable" partnerLink="IotSimulatorAlert"
+                       portType="ns21:IotSimulatorAlert_ptt" operation="Operation_IoTSim">
+                  <bpelx:skipCondition>$Header_Var/ns3:AppID='App1'</bpelx:skipCondition>
+                </reply>
+              </sequence>
+            </scope>
+          </sequence>
+        </elseif>
+        <else>
+          <reply name="replyCustomerIncidentOutput" variable="replyCustomerIncidentOutput_OutputVariable"
+                 partnerLink="CustomerIncident" portType="ns16:CustomerIncident_ptt" operation="CreateCustomerIncident">
+            <bpelx:skipCondition>$Header_Var/ns3:AppID!='App3'</bpelx:skipCondition>
+          </reply>
+        </else>
+      </if>
+    </scope>
+    <!--assign name="Assign_insert_CRM_Incident">
+      <copy>
+        <from>$Invoke_CreateIncident_OutputVariable.parameters/ns3:RNObjectsResult/ns3:RNObjects/ns4:ID/@id</from>
+        <to>$Invoke_insert_CRM_incident_InputVariable.CrmIncidentCollection/ns9:CrmIncident/ns9:rnIncidentId</to>
+      </copy>
+      <copy>
+        <from>$receiveInput_CreateIncident_InputVariable.request/client:Subject</from>
+        <to>$Invoke_insert_CRM_incident_InputVariable.CrmIncidentCollection/ns9:CrmIncident/ns9:subject</to>
+      </copy>
+      <copy>
+        <from>"Unresolved"</from>
+        <to>$Invoke_insert_CRM_incident_InputVariable.CrmIncidentCollection/ns9:CrmIncident/ns9:status</to>
+      </copy>
+      <copy>
+        <from>"IoT DFS"</from>
+        <to>$Invoke_insert_CRM_incident_InputVariable.CrmIncidentCollection/ns9:CrmIncident/ns9:isa</to>
+      </copy>
+      <copy>
+        <from>$Invoke_ReslDate_OutputVariable.parameters/ns3:CSVTableSet/ns3:CSVTables/ns3:CSVTable/ns3:Rows/ns3:Row</from>
+        <to>$Invoke_insert_CRM_incident_InputVariable.CrmIncidentCollection/ns9:CrmIncident/ns9:resolutionDueDate</to>
+      </copy>
+    </assign-->
+    <!-- Generate reply to synchronous request -->
+  </sequence>
+</process>

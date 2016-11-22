@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="insertOTARecord" adapter="db" wsdlLocation="../WSDLs/insertOTARecord.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory UIConnectionName="IoTDFSDataSource" location="eis/DB/IoTDFSDataSource"/>
+   <endpoint-interaction portType="insertOTARecord_ptt" operation="merge">
+      <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+         <property name="DescriptorName" value="insertOTARecord.DeviceOtaUpdates"/>
+         <property name="DmlType" value="merge"/>
+         <property name="MappingsMetaDataURL" value="insertOTARecord-or-mappings.xml"/>
+         <property name="GetActiveUnitOfWork" value="false"/>
+         <property name="OptimizeMerge" value="true"/>
+         <property name="DetectOmissions" value="true"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

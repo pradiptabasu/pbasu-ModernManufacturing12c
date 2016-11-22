@@ -1,0 +1,27 @@
+Modified Composite [ GE_Create_Incident ]
+  Composite properties
+	Property [ productVersion ]
+		No change in old and new value 12.1.3.0.0 
+	Property [ compositeID ]
+		No change in old and new value 6ee68abd-aedb-496b-9f6e-fa788b4a041c 
+	Component
+	  Component  [ GECreateIncidentWrapper ]
+	    Property [ bpel.config.transaction ]
+		No change in old and new value required 
+	    Property [ bpel.preference.IOTDeveiceID ]
+		No change in old and new value 0-6JKQ 
+	Service
+	  Service  [ CreateIncident ]
+	    Service Bindings
+	  	Binding  [ rest ]
+	  Service  [ gecreateincidentwrapper_client ]
+	Reference
+	  Reference  [ IoTDFS_CreateIncident ]
+	    Reference Bindings
+	  Reference  [ IoTDFS_CreateIncident ]
+	    Reference Bindings
+	  	Binding  [ rest ]
+	Attribute name=location
+		Old [ http://localhost:7001/soa-infra/resources/default/IoTDFS_CreateIncident!1.0/IotSimulatorAlert ] 
+		New [ http://oa9086.us.oracle.com:9005/soa-infra/resources/default/IoTDFS_CreateIncident!1.0/IotSimulatorAlert ] 
+---End Match for composite [ GE_Create_Incident ] in config plan---

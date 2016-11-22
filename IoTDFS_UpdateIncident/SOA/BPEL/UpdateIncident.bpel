@@ -1,0 +1,218 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Feb 18 19:18:20 IST 2016
+  Author:  abelur
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="UpdateIncident"
+               targetNamespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_UpdateIncident/UpdateIncident"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/IoT_DFS/IoTDFS_UpdateIncident/UpdateIncident"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="urn:wsdl.ws.rightnow.com/v1_3" xmlns:ns2="urn:messages.ws.rightnow.com/v1_3"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/IoT_DFS/IoTDFS_UpdateIncident/RestService"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_UpdateIncident/update_CRM_Incident"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns5="http://TargetNamespace.com/RestService_Operation1_request"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/update_CRM_Incident"
+         xmlns:ns7="urn:faults.ws.rightnow.com/v1_3"
+         xmlns:ns8="http://TargetNamespace.com/UpdateInc_Operation2_request" xmlns:ns9="urn:base.ws.rightnow.com/v1_3"
+         xmlns:ns10="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess"
+         xmlns:ns11="http://xmlns.oracle.com/SOACS/IoTDFS_CreateWorkOrder/updateIncident"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS_UpdateIncident/updateSeverity"
+         xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/db/top/updateSeverity">
+  <import namespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_UpdateIncident/UpdateIncident"
+          location="../Schemas/UpdateIncident.xsd" importType="http://www.w3.org/2001/XMLSchema"/>
+  <import namespace="urn:wsdl.ws.rightnow.com/v1_3" location="../WSDLs/rightNowWrapper.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <import namespace="urn:messages.ws.rightnow.com/v1_3" location="oramds:/apps/Schemas/soap_xsd_messagestyped.xsd"
+          importType="http://www.w3.org/2001/XMLSchema"/>
+  <!--import ui:processWSDL="true" namespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_UpdateIncident/UpdateIncident" location="../WSDLs/UpdateIncident.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/-->
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <!--partnerLink name="UpdateIncident_RN" partnerLinkType="ns1:UpdateIncident_RN" partnerRole="RightNowSyncPort"
+                 myRole="RightNowSyncPort"/-->
+    <partnerLink name="RestService" partnerLinkType="ns3:RestService" myRole="RestServiceProvider"/>
+    <partnerLink name="update_CRM_Incident" partnerLinkType="ns4:update_CRM_Incident_plt"
+                 partnerRole="update_CRM_Incident_role"/>
+    <partnerLink name="error_email" partnerLinkType="ns10:EmailNotificationProcess"
+                 partnerRole="EmailNotificationProcessProvider"/>
+    <partnerLink name="UpdateIncident_RN" partnerLinkType="ns1:UpdateIncident_RN" partnerRole="RightNowSyncPort"/>
+    <partnerLink name="updateSeverity" partnerLinkType="ns12:updateSeverity_plt" partnerRole="updateSeverity_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="Invoke_UpdateIncident_RN_InputVariable" messageType="ns1:UpdateRequest"/>
+    <variable name="Invoke_UpdateIncident_RN_OutputVariable" messageType="ns1:UpdateResponse"/>
+    <variable name="Header" element="ns2:ClientInfoHeader"/>
+    <variable name="receiveInput_Operation2_InputVariable" messageType="ns3:Operation2_inputMessage"/>
+    <variable name="Invoke_update_CRM_Incident_InputVariable" messageType="ns4:CrmIncidentCollection_msg"/>
+    <variable name="replyOutput_Variable" element="client:UpdateIncidentResponse"/>
+    <variable name="ReplyOutput" messageType="ns3:Operation2_outputMessage"/>
+    <variable name="Invoke_error_email_process_InputVariable"
+              messageType="ns10:EmailNotificationProcessRequestMessage"/>
+    <variable name="Invoke_update_CRM_Incident_update_InputVariable" messageType="ns12:CrmIncidentCollection_msg"/>
+  </variables>
+  <faultHandlers>
+    <catch faultName="ns1:RequestErrorFault" faultVariable="FVariable" faultElement="ns7:RequestErrorFault">
+      <sequence name="Sequence1">
+        <assign name="Assign_Error">
+          <copy>
+            <from>$FVariable/ns7:exceptionMessage</from>
+            <to>$ReplyOutput.reply/client:result</to>
+          </copy>
+        </assign>
+        <reply name="Reply_Error" variable="ReplyOutput" partnerLink="RestService"
+               portType="ns3:RestService_ptt" operation="Operation2"/>
+      </sequence>
+    </catch>
+    <catchAll>
+      <sequence name="Sequence2">
+        <assign name="Assign_error_email">
+          <copy>
+            <from>'ErrorEmail'</from>
+            <to>$Invoke_error_email_process_InputVariable.payload/ns10:emailType</to>
+          </copy>
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to>$Invoke_error_email_process_InputVariable.payload/ns10:processInstanceId</to>
+          </copy>
+          <copy>
+            <from>ora:getFaultAsString()</from>
+            <to>$Invoke_error_email_process_InputVariable.payload/ns10:errorMessage</to>
+          </copy>
+          <copy>
+            <from>ora:getCompositeName()</from>
+            <to>$Invoke_error_email_process_InputVariable.payload/ns10:processName</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_error_email" bpelx:invokeAsDetail="no" partnerLink="error_email"
+                portType="ns10:EmailNotificationProcess" operation="process"
+                inputVariable="Invoke_error_email_process_InputVariable"/>
+        <assign name="Assign_Error_Response">
+          <copy>
+            <from>'Error'</from>
+            <to>$ReplyOutput.reply/client:result</to>
+          </copy>
+        </assign>
+        <reply name="Reply_Error_response" variable="ReplyOutput" partnerLink="RestService"
+               portType="ns3:RestService_ptt" operation="Operation2"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in UpdateIncident.wsdl) -->
+    <receive name="receiveInput" partnerLink="RestService" portType="ns3:RestService_ptt" operation="Operation2"
+             variable="receiveInput_Operation2_InputVariable" createInstance="yes"/>
+    <assign name="Assign_Header">
+      <copy>
+        <from>"APP"</from>
+        <to>$Header/ns2:AppID</to>
+      </copy>
+    </assign>
+    <assign name="Xform_UpdateIncident">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/Xform_UpdateIncident.xsl", $receiveInput_Operation2_InputVariable.request)</from>
+        <to variable="Invoke_UpdateIncident_RN_InputVariable" part="parameters"/>
+      </copy>
+    </assign>
+    <invoke name="Invoke_UpdateIncident_RN" partnerLink="UpdateIncident_RN"
+            portType="ns1:RightNowSyncPort" operation="Update" inputVariable="Invoke_UpdateIncident_RN_InputVariable"
+            outputVariable="Invoke_UpdateIncident_RN_OutputVariable" bpelx:invokeAsDetail="no"
+            bpelx:inputHeaderVariable="Header"/>
+    <if name="If1">
+      <condition>string($receiveInput_Operation2_InputVariable.request/ns8:Severity)!=''</condition>
+      <sequence name="Sequence4">
+        <assign name="Assign_update">
+          <copy>
+            <from>$receiveInput_Operation2_InputVariable.request/ns8:Severity</from>
+            <to>$Invoke_update_CRM_Incident_update_InputVariable.CrmIncidentCollection/ns13:CrmIncident/ns13:incidentPriority</to>
+          </copy>
+          <copy>
+            <from>$receiveInput_Operation2_InputVariable.request/ns8:IncidentID</from>
+            <to>$Invoke_update_CRM_Incident_update_InputVariable.CrmIncidentCollection/ns13:CrmIncident/ns13:rnIncidentId</to>
+          </copy>
+          <copy>
+            <from>"Incident updated successfully"</from>
+            <to>$replyOutput_Variable/client:result</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_update_CRM_Incident" bpelx:invokeAsDetail="no" partnerLink="updateSeverity"
+                portType="ns12:updateSeverity_ptt" operation="update"
+                inputVariable="Invoke_update_CRM_Incident_update_InputVariable"/>
+      </sequence>
+      <else>
+        <sequence>
+          <assign name="Assign_update">
+            <copy>
+              <from>"Incident updated successfully"</from>
+              <to>$ReplyOutput.reply/client:result</to>
+            </copy>
+            <copy>
+              <from>$receiveInput_Operation2_InputVariable.request/ns8:IncidentID</from>
+              <to>$Invoke_update_CRM_Incident_InputVariable.CrmIncidentCollection/ns6:CrmIncident/ns6:rnIncidentId</to>
+            </copy>
+            <copy>
+              <from>$receiveInput_Operation2_InputVariable.request/ns8:Status</from>
+              <to>$Invoke_update_CRM_Incident_InputVariable.CrmIncidentCollection/ns6:CrmIncident/ns6:status</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_update_CRM_Incident" bpelx:invokeAsDetail="no" partnerLink="update_CRM_Incident"
+                  portType="ns4:update_CRM_Incident_ptt" operation="update"
+                  inputVariable="Invoke_update_CRM_Incident_InputVariable"/>
+        </sequence>
+      </else>
+    </if>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="RestService" portType="ns3:RestService_ptt" operation="Operation2"
+           variable="ReplyOutput"/>
+  </sequence>
+</process>

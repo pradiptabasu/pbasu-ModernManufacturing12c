@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="insert_CRM_Incident" adapter="db" wsdlLocation="../WSDLs/insert_CRM_Incident.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory UIConnectionName="IoT_DevDB" location="eis/DB/IoTDFSDataSource"/>
+   <endpoint-interaction portType="insert_CRM_Incident_ptt" operation="insert">
+      <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+         <property name="DescriptorName" value="insert_CRM_Incident.CrmIncident"/>
+         <property name="DmlType" value="insert"/>
+         <property name="MappingsMetaDataURL" value="insert_CRM_Incident-or-mappings.xml"/>
+         <property name="GetActiveUnitOfWork" value="false"/>
+         <property name="DetectOmissions" value="true"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

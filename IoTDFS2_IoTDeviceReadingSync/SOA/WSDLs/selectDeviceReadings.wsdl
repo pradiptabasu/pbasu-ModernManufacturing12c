@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="selectDeviceReadings" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS2_IoTDeviceReadingSync/selectDeviceReadings" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS2_IoTDeviceReadingSync/selectDeviceReadings" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/selectDeviceReadings" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plt:partnerLinkType name="selectDeviceReadings_plt">
+      <plt:role name="selectDeviceReadings_role">
+         <plt:portType name="tns:selectDeviceReadings_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/selectDeviceReadings" schemaLocation="../Schemas/selectDeviceReadings.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="selectDeviceReadingsInput_msg">
+      <wsdl:part name="selectDeviceReadingsInput_msg" element="db:selectDeviceReadingsInput"/>
+   </wsdl:message>
+   <wsdl:message name="selectDeviceReadingsOutputCollection_msg">
+      <wsdl:part name="selectDeviceReadingsOutputCollection" element="db:selectDeviceReadingsOutputCollection"/>
+   </wsdl:message>
+   <wsdl:portType name="selectDeviceReadings_ptt">
+      <wsdl:operation name="selectDeviceReadings">
+         <wsdl:input message="tns:selectDeviceReadingsInput_msg"/>
+         <wsdl:output message="tns:selectDeviceReadingsOutputCollection_msg"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

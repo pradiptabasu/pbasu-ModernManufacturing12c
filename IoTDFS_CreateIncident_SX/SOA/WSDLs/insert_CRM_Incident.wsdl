@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="insert_CRM_Incident" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident_SX/insert_CRM_Incident" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident_SX/insert_CRM_Incident" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/insert_CRM_Incident" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plt:partnerLinkType name="insert_CRM_Incident_plt">
+      <plt:role name="insert_CRM_Incident_role">
+         <plt:portType name="tns:insert_CRM_Incident_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/insert_CRM_Incident" schemaLocation="../Schemas/insert_CRM_Incident_table.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="CrmIncidentCollection_msg">
+      <wsdl:part name="CrmIncidentCollection" element="top:CrmIncidentCollection"/>
+   </wsdl:message>
+   <wsdl:portType name="insert_CRM_Incident_ptt">
+      <wsdl:operation name="insert">
+         <wsdl:input message="tns:CrmIncidentCollection_msg"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

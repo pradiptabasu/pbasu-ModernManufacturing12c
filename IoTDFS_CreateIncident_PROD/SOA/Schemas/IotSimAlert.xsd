@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request" targetNamespace="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+   <xsd:element name="IoTSimAlert">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="clientId" type="xsd:string"/>
+            <xsd:element name="source" type="xsd:string"/>
+            <xsd:element name="destination"/>
+            <xsd:element name="priority" type="xsd:string"/>
+            <xsd:element name="reliability" type="xsd:string"/>
+            <xsd:element name="eventTime" type="xsd:integer"/>
+            <xsd:element name="sender"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="properties"/>
+            <xsd:element name="direction" type="xsd:string"/>
+            <xsd:element name="receivedTime" type="xsd:integer"/>
+            <xsd:element name="sentTime" type="xsd:integer"/>
+            <xsd:element name="payload">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="format" type="xsd:string"/>
+                     <xsd:element name="data">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="data_subject" type="xsd:string"/>
+                              <xsd:element name="msg_priority" type="xsd:string"/>
+                              <xsd:element name="msg_destination"/>
+                              <xsd:element name="data_eventtime" type="xsd:float"/>
+                              <xsd:element name="data_weight" type="xsd:float"/>
+                              <xsd:element name="data_time" type="xsd:float"/>
+                              <xsd:element name="msg_sender"/>
+                              <xsd:element name="data_distance" type="xsd:float"/>
+                              <xsd:element name="source_severity" type="xsd:string"/>
+                              <xsd:element name="msg_id" type="xsd:string"/>
+                              <xsd:element name="source_category" type="xsd:string"/>
+                              <xsd:element name="msg_source" type="xsd:string"/>
+                              <xsd:element name="data_truckstatus" type="xsd:string"/>
+                              <xsd:element name="data_probabilityValue" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="data_timeToFail" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="data_failStatus" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="data_trendIndicator" type="xsd:string" minOccurs="0"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

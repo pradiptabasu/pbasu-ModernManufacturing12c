@@ -1,0 +1,122 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Nov 04 10:34:20 IST 2016
+  Author:  prabasu
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="GECreateIncidentWrapper"
+               targetNamespace="http://xmlns.oracle.com/ModernManufacturing_v1/GE_Create_Incident/GECreateIncidentWrapper"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/ModernManufacturing_v1/GE_Create_Incident/GECreateIncidentWrapper"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/ModernManufacturing_v1/GE_Create_Incident/IoTDFS_CreateIncident"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://www.oracle.com/isg/ModernMfg/GE/CreateIncident"
+         xmlns:ns2="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request"
+         xmlns:ns4="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/ModernManufacturing_v1/GE_Create_Incident/GECreateIncidentWrapper" location="../WSDLs/GECreateIncidentWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="gecreateincidentwrapper_client" partnerLinkType="client:GECreateIncidentWrapper" myRole="GECreateIncidentWrapperProvider"/>
+    <partnerLink name="IoTDFS_CreateIncident" partnerLinkType="ns1:IoTDFS_CreateIncident"
+                 partnerRole="IoTDFS_CreateIncidentProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:GECreateIncidentWrapperRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:GECreateIncidentWrapperResponseMessage"/>
+    <variable name="Create_Incident_Operation_IoTSim_InputVariable" messageType="ns1:Operation_IoTSim_inputMessage"/>
+    <variable name="Create_Incident_Operation_IoTSim_OutputVariable" messageType="ns1:Operation_IoTSim_outputMessage"/>
+    <variable name="title" type="xsd:string"/>
+    <variable name="Invoke1_Operation_IoTSim_InputVariable" messageType="ns1:Operation_IoTSim_inputMessage"/>
+    <variable name="Invoke1_Operation_IoTSim_OutputVariable" messageType="ns1:Operation_IoTSim_outputMessage"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in GECreateIncidentWrapper.wsdl) -->
+    <receive name="receiveInput" partnerLink="gecreateincidentwrapper_client" portType="client:GECreateIncidentWrapper" operation="GECreateIncident" variable="inputVariable" createInstance="yes"/>
+    <assign name="assign_Create_Incident_request">
+      <copy>
+        <from>ora:getPreference("IOTDeveiceID")</from>
+        <to>$Create_Incident_Operation_IoTSim_InputVariable.request/ns2:payload/ns2:data/ns2:msg_source</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/ns3:payload/ns3:data/ns3:msg_priority</from>
+        <to>$Create_Incident_Operation_IoTSim_InputVariable.request/ns2:payload/ns2:data/ns2:msg_priority</to>
+      </copy>
+      <copy>
+        <from>concat(ora:getPreference("SubjectPrefix"),' ',ora:getPreference("SubjectPrefixPadding"),' ',$inputVariable.payload/ns3:payload/ns3:data/ns3:data_subject)</from>
+        <to>$Create_Incident_Operation_IoTSim_InputVariable.request/ns2:payload/ns2:data/ns2:data_subject</to>
+      </copy>
+      <copy>
+        <from>concat('GE - ',ora:getComponentInstanceId())</from>
+        <to>$title</to>
+      </copy>
+    </assign>
+    <extensionActivity>
+      <bpelx:exec name="setTitle" language="java">
+        <![CDATA[String instanceTitle   = (String)getVariableData("title");       
+        setTitle(instanceTitle);              
+        setCompositeInstanceTitle(instanceTitle);    
+        setFlowInstanceTitle(instanceTitle);]]>
+      </bpelx:exec>
+    </extensionActivity>
+    <invoke name="Invoke_Create_Incident" partnerLink="IoTDFS_CreateIncident"
+            portType="ns1:IoTDFS_CreateIncident_ptt" operation="Operation_IoTSim"
+            inputVariable="Create_Incident_Operation_IoTSim_InputVariable"
+            outputVariable="Create_Incident_Operation_IoTSim_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <assign name="assign_Create_Incident_response">
+      <copy>
+        <from>$Create_Incident_Operation_IoTSim_OutputVariable.reply/ns4:result</from>
+        <to>$outputVariable.payload/ns3:createIncidentResponse</to>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="gecreateincidentwrapper_client" portType="client:GECreateIncidentWrapper" operation="GECreateIncident" variable="outputVariable"/>
+  </sequence>
+</process>

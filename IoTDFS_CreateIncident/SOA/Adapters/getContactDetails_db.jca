@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="getContactDetails" adapter="db" wsdlLocation="../WSDLs/getContactDetails.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory UIConnectionName="DBCSDataSource" location="eis/DB/IoTDFSDataSource"/>
+   <endpoint-interaction portType="getContactDetails_ptt" operation="getContactDetailsSelect">
+      <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+         <property name="DescriptorName" value="getContactDetails.DfsContactDetailsView"/>
+         <property name="QueryName" value="getContactDetailsSelect"/>
+         <property name="MappingsMetaDataURL" value="getContactDetails-or-mappings.xml"/>
+         <property name="ReturnSingleResultSet" value="false"/>
+         <property name="GetActiveUnitOfWork" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<orawsp:wsm-assembly xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy">
+  <sca11:policySet xmlns:sca11="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="policySet"
+                   appliesTo="SCA-SERVICE()"
+                   attachTo="SERVICE('customorderevent_sys1_process_client_ep') and PORT('BusinessEventsConnectorPayload_pt')"
+                   orawsp:highId="1"
+                   xml:id="SCA-SERVICE__SERVICE__customorderevent_sys1_process_client_ep___and_PORT__BusinessEventsConnectorPayload_pt__">
+    <wsp:PolicyReference xmlns:wsp="http://www.w3.org/ns/ws-policy"
+                         DigestAlgorithm="http://www.w3.org/ns/ws-policy/Sha1Exc"
+                         URI="oracle/wss11_saml_or_username_token_with_message_protection_service_policy"
+                         orawsp:status="enabled" orawsp:id="1"/>
+  </sca11:policySet>
+  <sca11:policySet xmlns:sca11="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="policySet"
+                   appliesTo="SCA-SERVICE()"
+                   attachTo="SERVICE('customorderevent_sys2_process_client_ep') and PORT('BusinessEventsConnectorPayload_pt')"
+                   orawsp:highId="1"
+                   xml:id="SCA-SERVICE__SERVICE__customorderevent_sys2_process_client_ep___and_PORT__BusinessEventsConnectorPayload_pt__">
+    <wsp:PolicyReference xmlns:wsp="http://www.w3.org/ns/ws-policy"
+                         DigestAlgorithm="http://www.w3.org/ns/ws-policy/Sha1Exc"
+                         URI="oracle/wss11_saml_or_username_token_with_message_protection_service_policy"
+                         orawsp:status="enabled" orawsp:id="1"/>
+  </sca11:policySet>
+  <sca11:policySet xmlns:sca11="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="policySet"
+                   appliesTo="SCA-SERVICE()"
+                   attachTo="SERVICE('customorderevent_sys3_process_client_ep') and PORT('BusinessEventsConnectorPayload_pt')"
+                   orawsp:highId="1"
+                   xml:id="SCA-SERVICE__SERVICE__customorderevent_sys3_process_client_ep___and_PORT__BusinessEventsConnectorPayload_pt__">
+    <wsp:PolicyReference xmlns:wsp="http://www.w3.org/ns/ws-policy"
+                         DigestAlgorithm="http://www.w3.org/ns/ws-policy/Sha1Exc"
+                         URI="oracle/wss11_saml_or_username_token_with_message_protection_service_policy"
+                         orawsp:status="enabled" orawsp:id="1"/>
+  </sca11:policySet>
+  <sca11:policySet xmlns:sca11="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="policySet"
+                   appliesTo="SCA-SERVICE()"
+                   attachTo="SERVICE('customorderevent_sys4_process_client_ep') and PORT('BusinessEventsConnectorPayload_pt')"
+                   orawsp:highId="1"
+                   xml:id="SCA-SERVICE__SERVICE__customorderevent_sys4_process_client_ep___and_PORT__BusinessEventsConnectorPayload_pt__">
+    <wsp:PolicyReference xmlns:wsp="http://www.w3.org/ns/ws-policy"
+                         DigestAlgorithm="http://www.w3.org/ns/ws-policy/Sha1Exc"
+                         URI="oracle/wss11_saml_or_username_token_with_message_protection_service_policy"
+                         orawsp:status="enabled" orawsp:id="1"/>
+  </sca11:policySet>
+  <sca11:policySet xmlns:sca11="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="policySet"
+                   appliesTo="SCA-SERVICE()"
+                   attachTo="SERVICE('customorderevent_sys5_process_client_ep') and PORT('BusinessEventsConnectorPayload_pt')"
+                   orawsp:highId="1"
+                   xml:id="SCA-SERVICE__SERVICE__customorderevent_sys5_process_client_ep___and_PORT__BusinessEventsConnectorPayload_pt__">
+    <wsp:PolicyReference xmlns:wsp="http://www.w3.org/ns/ws-policy"
+                         DigestAlgorithm="http://www.w3.org/ns/ws-policy/Sha1Exc"
+                         URI="oracle/wss11_saml_or_username_token_with_message_protection_service_policy"
+                         orawsp:status="enabled" orawsp:id="1"/>
+  </sca11:policySet>
+  <sca11:policySet xmlns:sca11="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="policySet"
+                   appliesTo="SCA-SERVICE()"
+                   attachTo="SERVICE('pdordereventprocessor_client_ep') and PORT('BusinessEventsConnectorPayload_pt')"
+                   orawsp:highId="1"
+                   xml:id="SCA-SERVICE__SERVICE__pdordereventprocessor_client_ep___and_PORT__BusinessEventsConnectorPayload_pt__">
+    <wsp:PolicyReference xmlns:wsp="http://www.w3.org/ns/ws-policy"
+                         DigestAlgorithm="http://www.w3.org/ns/ws-policy/Sha1Exc"
+                         URI="oracle/wss11_saml_or_username_token_with_message_protection_service_policy"
+                         orawsp:status="enabled" orawsp:id="1"/>
+  </sca11:policySet>
+</orawsp:wsm-assembly>

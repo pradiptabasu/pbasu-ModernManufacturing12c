@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/SOACS/Project1/BPELProcess1" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="processVariable">
+      <complexType>
+         <sequence>
+            <element name="batchLoopIndex" type="int"/>
+            <element name="deviceLoopIndex" type="int"/>
+            <element name="restURI" type="int"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

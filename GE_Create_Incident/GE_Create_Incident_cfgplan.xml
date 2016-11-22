@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAConfigPlan xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata"
+               xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+               xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"
+               xmlns:edl="http://schemas.oracle.com/events/edl" xmlns="http://schemas.oracle.com/soa/configplan">
+  <composite name="GE_Create_Incident">
+    <!--Add search and replace rules for the import section of a composite
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>-->
+    <import>
+      <searchReplace>
+        <search/>
+        <replace/>
+      </searchReplace>
+    </import>
+    <service name="CreateIncident">
+      <binding type="rest"/>
+    </service>
+    <service name="gecreateincidentwrapper_client"/>
+    <property name="productVersion">
+      <replace>12.1.3.0.0</replace>
+    </property>
+    <property name="compositeID">
+      <replace>6ee68abd-aedb-496b-9f6e-fa788b4a041c</replace>
+    </property>
+    <!--Add search and replace rules for the component properties
+	For components and service/reference bindings, you can add policy references.
+	Example:
+	<component name="*">
+		<wsp:PolicyReference orawsp:category="management" orawsp:status="enabled" URI="oracle/log_policy"/>
+	</component>-->
+    <component name="GECreateIncidentWrapper">
+      <property name="bpel.config.transaction">
+        <replace>required</replace>
+      </property>
+      <property name="bpel.preference.IOTDeveiceID">
+        <replace>0-6JKQ</replace>
+      </property>
+      <property name="bpel.preference.SubjectPrefix">
+        <replace>PRE</replace>
+      </property>
+      <property name="bpel.preference.SubjectPrefixPadding">
+        <replace>:</replace>
+      </property>
+    </component>
+    <reference name="IoTDFS_CreateIncident"/>
+    <reference name="IoTDFS_CreateIncident">
+      <binding type="rest">
+        <attribute name="location">
+          <replace>http://oa9086.us.oracle.com:9005/soa-infra/resources/default/IoTDFS_CreateIncident!1.0/IotSimulatorAlert</replace>
+        </attribute>
+      </binding>
+    </reference>
+  </composite>
+  <!--To configure monitor.config: 
+	<property name="enabled"><replace>true</replace></property>
+	<property name="dataObjectsFolder"><searchReplace><search>mydev</search><replace>myproduction</replace></searchReplace></property>
+	
+	sample properties to configure for adapter: 
+	<jca:property name="QueueName"><replace>medmq1</replace></jca:property>
+	
+	To add search and replace rules for wsdls, xsd and jca files
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>
+	-->
+  <!--<wsdlAndSchema name="Schemas/GECreateIncidentRequest.xsd|Schemas/GECreateIncidentResponse.xsd|Schemas/IoTDFS_CreateIncident_CreateIncident.xsd|Schemas/IoTDFS_CreateIncident_IotSimAlert.xsd|WSDLs/GECreateIncidentWrapper.wsdl|WSDLs/IoTDFS_CreateIncident.wsdl|composite.xml">
+    <searchReplace>
+      <search>http://localhost:7001/soa-infra/resources/default/IoTDFS_CreateIncident!1.0/IotSimulatorAlert</search>
+      <replace>http://oa9086.us.oracle.com:9005/soa-infra/resources/default/IoTDFS_CreateIncident!1.0/IotSimulatorAlert</replace>
+    </searchReplace>
+  </wsdlAndSchema>-->
+</SOAConfigPlan>

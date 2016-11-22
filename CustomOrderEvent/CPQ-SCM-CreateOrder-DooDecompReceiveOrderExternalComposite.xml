@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns1:process xmlns:ns1="http://xmlns.oracle.com/apps/scm/doo/decomposition/receiveTransform/receiveSalesOrder/DooDecompReceiveOrderExternalComposite">
+  <ns1:OrchestrationOrderRequest xmlns:ns2="http://xmlns.oracle.com/apps/scm/doo/decomposition/receiveTransform/receiveSalesOrder/model/">
+    <ns2:SourceTransactionNumber>CPQ-980</ns2:SourceTransactionNumber>
+    <ns2:SourceTransactionSystem>ORA_BM_CPQ</ns2:SourceTransactionSystem>
+    <ns2:SourceTransactionIdentifier>37151626</ns2:SourceTransactionIdentifier>
+    <ns2:BuyingPartyName>Crest Unlimited</ns2:BuyingPartyName>
+    <ns2:BuyingPartyContactName>Mark Lawrence</ns2:BuyingPartyContactName>
+    <ns2:BillToCustomerName>Crest Unlimited</ns2:BillToCustomerName>
+    <ns2:BillToAccountContactName>Mark Lawrence</ns2:BillToAccountContactName>
+    <ns2:ShipToPartyName>Crest Unlimited</ns2:ShipToPartyName>
+    <ns2:ShipToPartyContactName>Mark Lawrence</ns2:ShipToPartyContactName>
+    <ns2:ShipToAddress1>9550 W Higgins Rd</ns2:ShipToAddress1>
+    <ns2:ShipToCity>Rosemont</ns2:ShipToCity>
+    <ns2:ShipToState>IL</ns2:ShipToState>
+    <ns2:ShipToPostalCode>60018</ns2:ShipToPostalCode>
+    <ns2:ShipToCountry>US</ns2:ShipToCountry>
+    <ns2:TransactionalCurrencyCode>USD</ns2:TransactionalCurrencyCode>
+    <ns2:TransactionOn>2016-08-23T10:43:46.000</ns2:TransactionOn>
+    <ns2:RequestingBusinessUnitIdentifier>300000046987012</ns2:RequestingBusinessUnitIdentifier>
+    <ns2:PartialShipAllowedFlag>false</ns2:PartialShipAllowedFlag>
+    <ns2:OrchestrationOrderRequestLine>
+      <ns2:SourceTransactionLineIdentifier>1001</ns2:SourceTransactionLineIdentifier>
+      <ns2:SourceTransactionScheduleIdentifier>1001</ns2:SourceTransactionScheduleIdentifier>
+      <ns2:SourceTransactionLineNumber>2</ns2:SourceTransactionLineNumber>
+      <ns2:SourceTransactionScheduleNumber>2</ns2:SourceTransactionScheduleNumber>
+      <ns2:ProductNumber>HV00162_C</ns2:ProductNumber>
+      <ns2:OrderedQuantity>1</ns2:OrderedQuantity>
+      <ns2:UnitQuantity>1</ns2:UnitQuantity>
+      <ns2:OrderedUOMCode>zzu</ns2:OrderedUOMCode>
+      <ns2:RequestingBusinessUnitIdentifier>300000046987012</ns2:RequestingBusinessUnitIdentifier>
+      <ns2:ParentLineReference></ns2:ParentLineReference>
+      <ns2:RootParentLineReference></ns2:RootParentLineReference>
+      <ns2:ShippingInstructions></ns2:ShippingInstructions>
+      <ns2:PackingInstructions></ns2:PackingInstructions>
+      <ns2:RequestedShipDate>2016-08-24T00:00:00</ns2:RequestedShipDate>
+      <ns2:PaymentTerms>Net 30</ns2:PaymentTerms>
+      <ns2:TransactionCategoryCode>ORDER</ns2:TransactionCategoryCode>
+      <ns2:InventoryOrganizationIdentifier>300000047274441</ns2:InventoryOrganizationIdentifier>
+      <ns2:ShipToPartyName>Crest Unlimited</ns2:ShipToPartyName>
+      <ns2:ShipToPartyContactName>Mark Lawrence</ns2:ShipToPartyContactName>
+      <ns2:ShipToAddress1>9550 W Higgins Rd</ns2:ShipToAddress1>
+      <ns2:ShipToCity>Rosemont</ns2:ShipToCity>
+      <ns2:ShipToPostalCode>60018</ns2:ShipToPostalCode>
+      <ns2:ShipToState>IL</ns2:ShipToState>
+      <ns2:ShipToCountry>US</ns2:ShipToCountry>
+      <ns2:BillToCustomerName>Crest Unlimited</ns2:BillToCustomerName>
+      <ns2:BillToAccountContactName>Mark Lawrence</ns2:BillToAccountContactName>
+      <ns2:BillToAddress1>9550 W Higgins Rd</ns2:BillToAddress1>
+      <ns2:BillToCity>Rosemont</ns2:BillToCity>
+      <ns2:BillToPostalCode>60018</ns2:BillToPostalCode>
+      <ns2:BillToState>IL</ns2:BillToState>
+      <ns2:BillToCountry>US</ns2:BillToCountry>
+      <ns2:PartialShipAllowedFlag>false</ns2:PartialShipAllowedFlag>
+      <ns2:UnitListPrice>300.0</ns2:UnitListPrice>
+      <ns2:UnitSellingPrice>300.0</ns2:UnitSellingPrice>
+      <ns2:ContractStartDate>2016-08-25</ns2:ContractStartDate>
+      <ns2:ContractEndDate>2016-08-25</ns2:ContractEndDate>
+      <ns2:ExtendedAmount>300.0</ns2:ExtendedAmount>
+      <ns2:TaxExempt>S</ns2:TaxExempt>
+      <ns2:ShipSetName></ns2:ShipSetName>
+      <ns2:OrigSysDocumentReference>ORA_CPQ</ns2:OrigSysDocumentReference>
+      <ns2:OrigSysDocumentLineReference>ORA_CPQ_LINE</ns2:OrigSysDocumentLineReference>
+      <ns2:LineCharge>
+        <ns2:ChargeDefinitionCode>QP_SALE_PRICE</ns2:ChargeDefinitionCode>
+        <ns2:ChargeSubtypeCode>ORA_PRICE</ns2:ChargeSubtypeCode>
+        <ns2:PriceTypeCode>ONE_TIME</ns2:PriceTypeCode>
+        <ns2:PricedQuantity>1</ns2:PricedQuantity>
+        <ns2:PricedQuantityUOMCode>zzu</ns2:PricedQuantityUOMCode>
+        <ns2:PrimaryFlag>true</ns2:PrimaryFlag>
+        <ns2:ApplyTo>PRICE</ns2:ApplyTo>
+        <ns2:RollupFlag>false</ns2:RollupFlag>
+        <ns2:SourceChargeIdentifier>SC3</ns2:SourceChargeIdentifier>
+        <ns2:ChargeTypeCode>ORA_SALE</ns2:ChargeTypeCode>
+        <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+        <ns2:SequenceNumber>1</ns2:SequenceNumber>
+        <ns2:PricePeriodicityCode></ns2:PricePeriodicityCode>
+        <ns2:GsaUnitPrice></ns2:GsaUnitPrice>
+        <ns2:ChargeComponent>
+          <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+          <ns2:HeaderCurrencyCode>USD</ns2:HeaderCurrencyCode>
+          <ns2:HeaderCurrencyExtendedAmount>300.0</ns2:HeaderCurrencyExtendedAmount>
+          <ns2:PriceElementCode>QP_LIST_PRICE</ns2:PriceElementCode>
+          <ns2:SequenceNumber>1</ns2:SequenceNumber>
+          <ns2:PriceElementUsageCode>LIST_PRICE</ns2:PriceElementUsageCode>
+          <ns2:ChargeCurrencyUnitPrice>300.0</ns2:ChargeCurrencyUnitPrice>
+          <ns2:HeaderCurrencyUnitPrice>300.0</ns2:HeaderCurrencyUnitPrice>
+          <ns2:RollupFlag>false</ns2:RollupFlag>
+          <ns2:SourceParentChargeComponentId></ns2:SourceParentChargeComponentId>
+          <ns2:SourceChargeIdentifier>SC2</ns2:SourceChargeIdentifier>
+          <ns2:SourceChargeComponentIdentifier>SCC3</ns2:SourceChargeComponentIdentifier>
+          <ns2:ChargeCurrencyExtendedAmount>300.0</ns2:ChargeCurrencyExtendedAmount>
+        </ns2:ChargeComponent>
+        <ns2:ChargeComponent>
+          <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+          <ns2:HeaderCurrencyCode>USD</ns2:HeaderCurrencyCode>
+          <ns2:HeaderCurrencyExtendedAmount>300.0</ns2:HeaderCurrencyExtendedAmount>
+          <ns2:PriceElementCode>QP_NET_PRICE</ns2:PriceElementCode>
+          <ns2:SequenceNumber>3</ns2:SequenceNumber>
+          <ns2:PriceElementUsageCode>NET_PRICE</ns2:PriceElementUsageCode>
+          <ns2:ChargeCurrencyUnitPrice>300.0</ns2:ChargeCurrencyUnitPrice>
+          <ns2:HeaderCurrencyUnitPrice>300.0</ns2:HeaderCurrencyUnitPrice>
+          <ns2:RollupFlag>false</ns2:RollupFlag>
+          <ns2:SourceParentChargeComponentId></ns2:SourceParentChargeComponentId>
+          <ns2:SourceChargeIdentifier>SC2</ns2:SourceChargeIdentifier>
+          <ns2:SourceChargeComponentIdentifier>SCC1</ns2:SourceChargeComponentIdentifier>
+          <ns2:ChargeCurrencyExtendedAmount>300.0</ns2:ChargeCurrencyExtendedAmount>
+        </ns2:ChargeComponent>
+      </ns2:LineCharge>
+      <ns2:LineCharge>
+        <ns2:ChargeDefinitionCode>QP_SALE_PRICE</ns2:ChargeDefinitionCode>
+        <ns2:ChargeSubtypeCode>ORA_PRICE</ns2:ChargeSubtypeCode>
+        <ns2:PriceTypeCode>ONE_TIME</ns2:PriceTypeCode>
+        <ns2:PricedQuantity>1</ns2:PricedQuantity>
+        <ns2:PricedQuantityUOMCode>zzu</ns2:PricedQuantityUOMCode>
+        <ns2:PrimaryFlag>false</ns2:PrimaryFlag>
+        <ns2:ApplyTo>PRICE</ns2:ApplyTo>
+        <ns2:RollupFlag>true</ns2:RollupFlag>
+        <ns2:SourceChargeIdentifier>SC2</ns2:SourceChargeIdentifier>
+        <ns2:ChargeTypeCode>ORA_SALE</ns2:ChargeTypeCode>
+        <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+        <ns2:SequenceNumber>2</ns2:SequenceNumber>
+        <ns2:PricePeriodicityCode></ns2:PricePeriodicityCode>
+        <ns2:GsaUnitPrice></ns2:GsaUnitPrice>
+        <ns2:ChargeComponent>
+          <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+          <ns2:HeaderCurrencyCode>USD</ns2:HeaderCurrencyCode>
+          <ns2:HeaderCurrencyExtendedAmount>335.0</ns2:HeaderCurrencyExtendedAmount>
+          <ns2:PriceElementCode>QP_LIST_PRICE</ns2:PriceElementCode>
+          <ns2:SequenceNumber>1</ns2:SequenceNumber>
+          <ns2:PriceElementUsageCode>LIST_PRICE</ns2:PriceElementUsageCode>
+          <ns2:ChargeCurrencyUnitPrice>335.0</ns2:ChargeCurrencyUnitPrice>
+          <ns2:HeaderCurrencyUnitPrice>335.0</ns2:HeaderCurrencyUnitPrice>
+          <ns2:RollupFlag>true</ns2:RollupFlag>
+          <ns2:SourceParentChargeComponentId></ns2:SourceParentChargeComponentId>
+          <ns2:SourceChargeIdentifier>SC2</ns2:SourceChargeIdentifier>
+          <ns2:SourceChargeComponentIdentifier>SCC3</ns2:SourceChargeComponentIdentifier>
+          <ns2:ChargeCurrencyExtendedAmount>335.0</ns2:ChargeCurrencyExtendedAmount>
+        </ns2:ChargeComponent>
+        <ns2:ChargeComponent>
+          <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+          <ns2:HeaderCurrencyCode>USD</ns2:HeaderCurrencyCode>
+          <ns2:HeaderCurrencyExtendedAmount>335.0</ns2:HeaderCurrencyExtendedAmount>
+          <ns2:PriceElementCode>QP_NET_PRICE</ns2:PriceElementCode>
+          <ns2:SequenceNumber>3</ns2:SequenceNumber>
+          <ns2:PriceElementUsageCode>NET_PRICE</ns2:PriceElementUsageCode>
+          <ns2:ChargeCurrencyUnitPrice>335.0</ns2:ChargeCurrencyUnitPrice>
+          <ns2:HeaderCurrencyUnitPrice>335.0</ns2:HeaderCurrencyUnitPrice>
+          <ns2:RollupFlag>true</ns2:RollupFlag>
+          <ns2:SourceParentChargeComponentId></ns2:SourceParentChargeComponentId>
+          <ns2:SourceChargeIdentifier>SC2</ns2:SourceChargeIdentifier>
+          <ns2:SourceChargeComponentIdentifier>SCC1</ns2:SourceChargeComponentIdentifier>
+          <ns2:ChargeCurrencyExtendedAmount>335.0</ns2:ChargeCurrencyExtendedAmount>
+        </ns2:ChargeComponent>
+      </ns2:LineCharge>
+    </ns2:OrchestrationOrderRequestLine>
+    <ns2:OrchestrationOrderRequestLine>
+      <ns2:SourceTransactionLineIdentifier>1002</ns2:SourceTransactionLineIdentifier>
+      <ns2:SourceTransactionScheduleIdentifier>1002</ns2:SourceTransactionScheduleIdentifier>
+      <ns2:SourceTransactionLineNumber>3</ns2:SourceTransactionLineNumber>
+      <ns2:SourceTransactionScheduleNumber>3</ns2:SourceTransactionScheduleNumber>
+      <ns2:ProductNumber>HV00164</ns2:ProductNumber>
+      <ns2:OrderedQuantity>1</ns2:OrderedQuantity>
+      <ns2:UnitQuantity>1</ns2:UnitQuantity>
+      <ns2:OrderedUOMCode>zzu</ns2:OrderedUOMCode>
+      <ns2:RequestingBusinessUnitIdentifier>300000046987012</ns2:RequestingBusinessUnitIdentifier>
+      <ns2:ParentLineReference>1001</ns2:ParentLineReference>
+      <ns2:RootParentLineReference>1001</ns2:RootParentLineReference>
+      <ns2:ShippingInstructions></ns2:ShippingInstructions>
+      <ns2:PackingInstructions></ns2:PackingInstructions>
+      <ns2:RequestedShipDate>2016-08-24T00:00:00</ns2:RequestedShipDate>
+      <ns2:PaymentTerms>Net 30</ns2:PaymentTerms>
+      <ns2:TransactionCategoryCode>ORDER</ns2:TransactionCategoryCode>
+      <ns2:InventoryOrganizationIdentifier>300000047274441</ns2:InventoryOrganizationIdentifier>
+      <ns2:ShipToPartyName>Crest Unlimited</ns2:ShipToPartyName>
+      <ns2:ShipToPartyContactName>Mark Lawrence</ns2:ShipToPartyContactName>
+      <ns2:ShipToAddress1>9550 W Higgins Rd</ns2:ShipToAddress1>
+      <ns2:ShipToCity>Rosemont</ns2:ShipToCity>
+      <ns2:ShipToPostalCode>60018</ns2:ShipToPostalCode>
+      <ns2:ShipToState>IL</ns2:ShipToState>
+      <ns2:ShipToCountry>US</ns2:ShipToCountry>
+      <ns2:BillToCustomerName>Crest Unlimited</ns2:BillToCustomerName>
+      <ns2:BillToAccountContactName>Mark Lawrence</ns2:BillToAccountContactName>
+      <ns2:BillToAddress1>9550 W Higgins Rd</ns2:BillToAddress1>
+      <ns2:BillToCity>Rosemont</ns2:BillToCity>
+      <ns2:BillToPostalCode>60018</ns2:BillToPostalCode>
+      <ns2:BillToState>IL</ns2:BillToState>
+      <ns2:BillToCountry>US</ns2:BillToCountry>
+      <ns2:PartialShipAllowedFlag>false</ns2:PartialShipAllowedFlag>
+      <ns2:UnitListPrice>35.0</ns2:UnitListPrice>
+      <ns2:UnitSellingPrice>35.0</ns2:UnitSellingPrice>
+      <ns2:ContractStartDate>2016-08-25</ns2:ContractStartDate>
+      <ns2:ContractEndDate>2016-08-25</ns2:ContractEndDate>
+      <ns2:ExtendedAmount>35.0</ns2:ExtendedAmount>
+      <ns2:TaxExempt>S</ns2:TaxExempt>
+      <ns2:ShipSetName></ns2:ShipSetName>
+      <ns2:OrigSysDocumentReference>ORA_CPQ</ns2:OrigSysDocumentReference>
+      <ns2:OrigSysDocumentLineReference>ORA_CPQ_LINE</ns2:OrigSysDocumentLineReference>
+      <ns2:LineCharge>
+        <ns2:ChargeDefinitionCode>QP_SALE_PRICE</ns2:ChargeDefinitionCode>
+        <ns2:ChargeSubtypeCode>ORA_PRICE</ns2:ChargeSubtypeCode>
+        <ns2:PriceTypeCode>ONE_TIME</ns2:PriceTypeCode>
+        <ns2:PricedQuantity>1</ns2:PricedQuantity>
+        <ns2:PricedQuantityUOMCode>zzu</ns2:PricedQuantityUOMCode>
+        <ns2:PrimaryFlag>true</ns2:PrimaryFlag>
+        <ns2:ApplyTo>PRICE</ns2:ApplyTo>
+        <ns2:RollupFlag>false</ns2:RollupFlag>
+        <ns2:SourceChargeIdentifier>SC2</ns2:SourceChargeIdentifier>
+        <ns2:ChargeTypeCode>ORA_SALE</ns2:ChargeTypeCode>
+        <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+        <ns2:SequenceNumber>3</ns2:SequenceNumber>
+        <ns2:PricePeriodicityCode></ns2:PricePeriodicityCode>
+        <ns2:GsaUnitPrice></ns2:GsaUnitPrice>
+        <ns2:ChargeComponent>
+          <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+          <ns2:HeaderCurrencyCode>USD</ns2:HeaderCurrencyCode>
+          <ns2:HeaderCurrencyExtendedAmount>35.0</ns2:HeaderCurrencyExtendedAmount>
+          <ns2:PriceElementCode>QP_LIST_PRICE</ns2:PriceElementCode>
+          <ns2:SequenceNumber>1</ns2:SequenceNumber>
+          <ns2:PriceElementUsageCode>LIST_PRICE</ns2:PriceElementUsageCode>
+          <ns2:ChargeCurrencyUnitPrice>35.0</ns2:ChargeCurrencyUnitPrice>
+          <ns2:HeaderCurrencyUnitPrice>35.0</ns2:HeaderCurrencyUnitPrice>
+          <ns2:RollupFlag>false</ns2:RollupFlag>
+          <ns2:SourceParentChargeComponentId></ns2:SourceParentChargeComponentId>
+          <ns2:SourceChargeIdentifier>SC2</ns2:SourceChargeIdentifier>
+          <ns2:SourceChargeComponentIdentifier>SCC3</ns2:SourceChargeComponentIdentifier>
+          <ns2:ChargeCurrencyExtendedAmount>35.0</ns2:ChargeCurrencyExtendedAmount>
+        </ns2:ChargeComponent>
+        <ns2:ChargeComponent>
+          <ns2:ChargeCurrencyCode>USD</ns2:ChargeCurrencyCode>
+          <ns2:HeaderCurrencyCode>USD</ns2:HeaderCurrencyCode>
+          <ns2:HeaderCurrencyExtendedAmount>35.0</ns2:HeaderCurrencyExtendedAmount>
+          <ns2:PriceElementCode>QP_NET_PRICE</ns2:PriceElementCode>
+          <ns2:SequenceNumber>3</ns2:SequenceNumber>
+          <ns2:PriceElementUsageCode>NET_PRICE</ns2:PriceElementUsageCode>
+          <ns2:ChargeCurrencyUnitPrice>35.0</ns2:ChargeCurrencyUnitPrice>
+          <ns2:HeaderCurrencyUnitPrice>35.0</ns2:HeaderCurrencyUnitPrice>
+          <ns2:RollupFlag>false</ns2:RollupFlag>
+          <ns2:SourceParentChargeComponentId></ns2:SourceParentChargeComponentId>
+          <ns2:SourceChargeIdentifier>SC2</ns2:SourceChargeIdentifier>
+          <ns2:SourceChargeComponentIdentifier>SCC1</ns2:SourceChargeComponentIdentifier>
+          <ns2:ChargeCurrencyExtendedAmount>35.0</ns2:ChargeCurrencyExtendedAmount>
+        </ns2:ChargeComponent>
+      </ns2:LineCharge>
+    </ns2:OrchestrationOrderRequestLine>
+  </ns1:OrchestrationOrderRequest>
+</ns1:process>

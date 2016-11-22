@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SOAConfigPlan xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns="http://schemas.oracle.com/soa/configplan">
+   <composite name="IoTDFS_UpdateIncident">
+      <import>
+         <searchReplace>
+            <search/>
+            <replace/>
+         </searchReplace>
+      </import>
+      <service name="UpdateInc">
+         <binding type="rest"/>
+      </service>
+      <service name="RestService"/>
+      <property name="compositeID">
+         <replace>f868a200-7609-411f-881c-8d2e146c459c</replace>
+      </property>
+      <property name="productVersion">
+         <replace>12.1.3.0.0</replace>
+      </property>
+      <component name="UpdateIncident">
+         <property name="bpel.config.transaction">
+            <replace>required</replace>
+         </property>
+      </component>
+      <reference name="update_CRM_Incident"/>
+      <reference name="error_email"/>
+      <reference name="UpdateIncident_RN"/>
+      <reference name="update_CRM_Incident">
+         <property name="jca.retry.count">
+            <replace>4</replace>
+         </property>
+         <property name="jca.retry.interval">
+            <replace>1</replace>
+         </property>
+         <property name="jca.retry.backoff">
+            <replace>2</replace>
+         </property>
+         <property name="jca.retry.maxInterval">
+            <replace>120</replace>
+         </property>
+         <binding type="jca"/>
+      </reference>
+      <reference name="error_email">
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess#wsdl.endpoint(emailnotificationprocess_client_ep/EmailNotificationProcess_pt)</replace>
+            </attribute>
+            <attribute name="location">
+               <replace>http://soacs.oracle.com:9005/soa-infra/services/default/EmailNotificationProcess/emailnotificationprocess_client_ep?WSDL</replace>
+            </attribute>
+         </binding>
+      </reference>
+      <reference name="UpdateIncident_RN">
+         <binding type="ws">
+            <attribute name="port">
+               <replace>urn:wsdl.ws.rightnow.com/v1_3#wsdl.endpoint(RightNowSyncService/RightNowSyncPort)</replace>
+            </attribute>
+            <attribute name="location">
+               <replace>http://sc-mkeever-toa.rightnowdemo.com/cgi-bin/sc_mkeever_toa.cfg/services/soap?wsdl</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>WSDLDriven</replace>
+            </property>
+         </binding>
+      </reference>
+   </composite>
+   <wsdlAndSchema name="Adapters/update_CRM_Incident_db.jca|Schemas/nxsd_schema1.xsd|Schemas/UpdateInc.xsd|Schemas/UpdateIncident.xsd|Schemas/update_CRM_Incident_table.xsd|WSDLs/RestService.wsdl|WSDLs/rightNowWrapper.wsdl|WSDLs/update_CRM_Incident.wsdl">
+      <searchReplace>
+         <search/>
+         <replace/>
+      </searchReplace>
+   </wsdlAndSchema>
+</SOAConfigPlan>

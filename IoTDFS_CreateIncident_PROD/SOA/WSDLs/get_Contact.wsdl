@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="get_Contact" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident/get_Contact" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/IoT_DFS/IoTDFS_CreateIncident/get_Contact" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <plt:partnerLinkType name="get_Contact_plt">
+      <plt:role name="get_Contact_role">
+         <plt:portType name="tns:get_Contact_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/get_Contact" schemaLocation="../Schemas/get_Contact.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="get_ContactInput_msg">
+      <wsdl:part name="get_ContactInput_msg" element="db:get_ContactInput"/>
+   </wsdl:message>
+   <wsdl:message name="get_ContactOutputCollection_msg">
+      <wsdl:part name="get_ContactOutputCollection" element="db:get_ContactOutputCollection"/>
+   </wsdl:message>
+   <wsdl:portType name="get_Contact_ptt">
+      <wsdl:operation name="get_Contact">
+         <wsdl:input message="tns:get_ContactInput_msg"/>
+         <wsdl:output message="tns:get_ContactOutputCollection_msg"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

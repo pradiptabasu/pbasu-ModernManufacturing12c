@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="BusinessEventsConnector" targetNamespace="http://xmlns.oracle.com/apps/scm/doo/taskLayer/externalInterfaceLayer/DooTaskExternalInterfaceVirtualPartnersComposite/BusinessEventsConnector" xmlns:ns1="http://xmlns.oracle.com/apps/scm/doo/decomposition/DooDecompositionOrderStatusUpdateComposite" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/apps/scm/doo/taskLayer/externalInterfaceLayer/DooTaskExternalInterfaceVirtualPartnersComposite/BusinessEventsConnector" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+   <wsdl:documentation>
+      <name>BusinessEvents Connector Service</name>
+      <docCategories>
+         <category>None</category>
+      </docCategories>
+   </wsdl:documentation>
+   <wsdl:types>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.oracle.com/apps/scm/doo/decomposition/DooDecompositionOrderStatusUpdateComposite" targetNamespace="http://xmlns.oracle.com/apps/scm/doo/decomposition/DooDecompositionOrderStatusUpdateComposite" elementFormDefault="qualified">
+         <xsd:element name="results">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="OrderHeader" type="OrderHeader" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:complexType name="OrderHeader">
+            <xsd:sequence>
+               <xsd:element name="EventCode" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SourceOrderSystem" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SourceOrderId" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SourceOrderNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrchestrationOrderNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrchestrationOrderId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="CustomerId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="HoldCode" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="HoldComments" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="CompensationStatus" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="CompensationMessage" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="StatusCodeOldValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="StatusCodeNewValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="StatusPriorValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="StatusNewValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrderLine" type="OrderLine" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="OrderLine">
+            <xsd:sequence>
+               <xsd:element name="EventCode" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrchestrationOrderLineId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrchestrationOrderLineNumber" type="xsd:int" minOccurs="0" nillable="true"/>
+               <xsd:element name="HoldCode" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="HoldComments" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SourceOrderLineId" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SourceOrderLineNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SourceOrderSystem" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SourceOrderId" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SourceOrderScheduleId" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="PreSplitOrderedQuantity" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="ItemId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="InventoryOrganizationId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="OpenFlagNewValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="OpenFlagOldValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="StatusCodeOldValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="StatusCodeNewValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrderFulfillmentLine" type="OrderFulfillmentLine" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="OrderFulfillmentLine">
+            <xsd:sequence>
+               <xsd:element name="SourceOrderScheduleId" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrchestrationOrderLineId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="FulfillmentOrderLineId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="FulfillmentOrderLineNumber" type="xsd:int" minOccurs="0" nillable="true"/>
+               <xsd:element name="ActualShipDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="ActualShipDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillToContactIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillToContactIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillToCustomerIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillToCustomerIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="FobPointCodeNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="FobPointCodeOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="FulfillOrgIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="FulfillOrgIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="InventoryItemIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="InventoryItemIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrderedQtyNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrderedQtyOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="PromiseArrivalDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="PromiseArrivalDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="PromiseShipDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="PromiseShipDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="RequestArrivalDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="RequestArrivalDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="RequestShipDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="RequestShipDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="ScheduleShipDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="ScheduleShipDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="ScheduleArrivalDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="ScheduleArrivalDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipClassOfServiceNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipClassOfServiceOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipModeOfTransportNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipModeOfTransportOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipmentPriorityCodeNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipmentPriorityCodeOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipToContactIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipToContactIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipToCustomerIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipToCustomerIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipToSiteUseIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShipToSiteUseIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="TaxClassificationCodeNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="TaxClassificationCodeOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="TaxExemptFlagNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="TaxExemptFlagOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="UnitSellingPriceNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="UnitSellingPriceOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="ActualCompletionDateNew" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="ActualCompletionDateOld" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillToSiteUseIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillToSiteUseIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="CarrierIdNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="CarrierIdOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="CustomerPoNumberNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="CustomerPoNumberOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="DemandClassCodeNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="DemandClassCodeOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="EarliestAcceptableShipDateNew" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="EarliestAcceptableShipDateOld" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="EstimateFulfillmentCostNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="EstimateFulfillmentCostOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="EstimateMarginNew" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="EstimateMarginOld" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="FulfillmentDateNew" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="FulfillmentDateOld" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="LatestAcceptableArrivalDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="LatestAcceptableArrivalDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="LatestAcceptableShipDateNew" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="LatestAcceptableShipDateOld" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="RemnantFlagNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="RemnantFlagOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ReturnReasonCodeNew" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ReturnReasonCodeOld" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="HoldCode" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="HoldComments" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="ItemId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="InventoryOrganizationId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="ShippedQuantity" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrderedQuantity" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="JeopardyPriority" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="StatusCodeOldValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="StatusCodeNewValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="CancelFlagOldValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="CancelFlagNewValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrderFulfillmentLineDetails" type="OrderFulfillmentLineDetails" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element name="OrderFulfillmentLineEFFs" type="OrderFulfillmentLineEFFs" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="OrderFulfillmentLineDetails">
+            <xsd:sequence>
+               <xsd:element name="FulfillmentOrderLineDetailId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="TaskType" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillingTransactionNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillingTransactionDate" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillingTransactionAmount" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="WaybillNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="BillOfLaddingNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="TrackingNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="Quantity" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="Status" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="DeliveryName" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="RmaReceiptNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="RmaReceiptLineNumber" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="RmaReceiptDate" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="RmaReceiptTransactionId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="CustomerTrxLineId" type="xsd:long" minOccurs="0" nillable="true"/>
+               <xsd:element name="OrderFulfillmentLineEFFs" type="OrderFulfillmentLineEFFs" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="OrderFulfillmentLineEFFs">
+            <xsd:sequence>
+               <xsd:element name="ContextCode" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentCode" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentCharOldValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentCharNewValue" type="xsd:string" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentNumOldValue" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentNumNewValue" type="xsd:decimal" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentDateOldValue" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentDateNewValue" type="xsd:date" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentTimeOldValue" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+               <xsd:element name="SegmentTimeNewValue" type="xsd:dateTime" minOccurs="0" nillable="true"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="BusinessEventsConnectorPayloadRequestMessage">
+      <wsdl:part name="payload" element="ns1:results"/>
+   </wsdl:message>
+   <wsdl:portType name="BusinessEventsConnectorPayload">
+      <wsdl:operation name="pushPayload">
+         <wsdl:input message="client:BusinessEventsConnectorPayloadRequestMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <plnk:partnerLinkType name="BusinessEventsConnectorService">
+      <plnk:role name="BusinessEventsConnectorPayload">
+         <plnk:portType name="client:BusinessEventsConnectorPayload"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+</wsdl:definitions>

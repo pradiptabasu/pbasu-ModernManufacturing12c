@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="Incident" targetNamespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/Incident" xmlns:tns="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/Incident" xmlns:inp1="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="urn:messages.ws.rightnow.com/v1_3" xmlns:ns2="urn:faults.ws.rightnow.com/v1_3">
+   <plnk:partnerLinkType name="Incident">
+      <plnk:role name="IncidentProvider" portType="tns:Incident_ptt"/>
+   </plnk:partnerLinkType>
+   <wsdl:types>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident" schemaLocation="../Schemas/CreateIncident.xsd"/>
+      </xsd:schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="urn:messages.ws.rightnow.com/v1_3" schemaLocation="oramds:/apps/Schemas/soap_xsd_messagestyped.xsd"/>
+      </xsd:schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="urn:faults.ws.rightnow.com/v1_3" schemaLocation="oramds:/apps/Schemas/soap_xsd_faults.xsd"/>
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="CreateIncident_inputMessage">
+      <wsdl:part name="request" element="inp1:CreateIncidentReq"/>
+   </wsdl:message>
+   <wsdl:message name="CreateIncident_outputMessage">
+      <wsdl:part name="reply" element="inp1:IncidentResponse"/>
+   </wsdl:message>
+   <wsdl:portType name="Incident_ptt">
+      <wsdl:operation name="CreateIncident">
+         <wsdl:input message="tns:CreateIncident_inputMessage"/>
+         <wsdl:output message="tns:CreateIncident_outputMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="findDeviceISA" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS2_IoTDeviceReadingSync/findDeviceISA" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS2_IoTDeviceReadingSync/findDeviceISA" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/findDeviceISA" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+   <plt:partnerLinkType name="findDeviceISA_plt">
+      <plt:role name="findDeviceISA_role">
+         <plt:portType name="tns:findDeviceISA_ptt"/>
+      </plt:role>
+   </plt:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/findDeviceISA" schemaLocation="../Schemas/findDeviceISA_table.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="findDeviceISASelect_inputParameters">
+      <wsdl:part name="findDeviceISASelect_inputParameters" element="top:findDeviceISASelect_deviceIdInputParameters"/>
+   </wsdl:message>
+   <wsdl:message name="DeviceInstanceCollection_msg">
+      <wsdl:part name="DeviceInstanceCollection" element="top:DeviceInstanceCollection"/>
+   </wsdl:message>
+   <wsdl:portType name="findDeviceISA_ptt">
+      <wsdl:operation name="findDeviceISASelect">
+         <wsdl:input message="tns:findDeviceISASelect_inputParameters"/>
+         <wsdl:output message="tns:DeviceInstanceCollection_msg"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

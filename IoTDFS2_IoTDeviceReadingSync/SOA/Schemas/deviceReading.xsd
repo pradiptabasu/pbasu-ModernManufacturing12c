@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dr="http://www.example.org" targetNamespace="http://www.example.org" elementFormDefault="qualified">
+   <xsd:element name="DeviceReadingSyncReq">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="clientId" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="source" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="destination" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="priority" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="reliability" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="eventTime" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="sender" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="properties" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="direction" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="receivedTime" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="receivedTimeAsString" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="sentTime" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="sentTimeAsString" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="payload">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="format" type="xsd:string" minOccurs="0"/>
+                     <xsd:element name="data" minOccurs="0">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="pumpRPM" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="currentTime" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="eventType" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="motorOpFrequency" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="bearingTemp" type="xsd:double" minOccurs="0"/>
+                              <xsd:element name="onOff" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="pumpDischargePressure" type="xsd:double" minOccurs="0"/>
+                              <xsd:element name="pumpFlowRate" type="xsd:double" minOccurs="0"/>
+                              <xsd:element name="pumpIntakePressure" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="pumpIntakeTemp" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="pumpNoiseLevel" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="pumpVibration" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="probabilityValue" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="timeToFail" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="failStatus" type="xsd:string" minOccurs="0"/>
+                              <xsd:element name="trendIndicator" type="xsd:string" minOccurs="0"/>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="DeviceReadingRes">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="Status" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

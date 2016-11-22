@@ -1,0 +1,214 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Mar 18 11:51:52 IST 2016
+  Author:  himshekh
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="batchUpdateBPELProcess"
+               targetNamespace="http://xmlns.oracle.com/DEVICE_READING/IoTDFS_IoTBatchUpdate/batchUpdateBPELProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/DEVICE_READING/IoTDFS_IoTBatchUpdate/batchUpdateBPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/DEVICE_READING/IoTDFS_IoTBatchUpdate/BatchUpdate"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns2="http://www.example.org"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  
+<import location="org.apache.http.client.methods.HttpPut" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.entity.StringEntity" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="java.net.URI" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.client.HttpClient" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.client.HttpClient" importType="http://schemas.oracle.com/bpel/extension/java" />
+<import location="org.apache.http.HttpResponse" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.impl.client.HttpClientBuilder" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.util.EntityUtils" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.HttpEntity" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.conn.ssl.TrustStrategy" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="org.apache.http.impl.client.CloseableHttpClient" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="org.apache.http.conn.ssl.AllowAllHostnameVerifier" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="org.apache.http.conn.ssl.SSLContextBuilder" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="java.security.cert.CertificateException" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location ="java.security.cert.X509Certificate" importType="http://schemas.oracle.com/bpel/extension/java"/>
+<import location="org.apache.http.impl.client.HttpClients" importType="http://schemas.oracle.com/bpel/extension/java"/>
+
+  <import namespace="http://xmlns.oracle.com/DEVICE_READING/IoTDFS_IoTBatchUpdate/BatchUpdate"
+          location="../WSDLs/BatchUpdate.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="BatchUpdate" partnerLinkType="ns1:BatchUpdate" myRole="BatchUpdateProvider"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive1_PostOper_InputVariable" messageType="ns1:PostOper_inputMessage"/>
+    <variable name="Reply1_PostOper_OutputVariable" messageType="ns1:PostOper_outputMessage"/>
+    <variable name="countBatchName" type="xsd:integer"/>
+    <variable name="Batchllopindex" type="xsd:integer"/>
+    <variable name="countDeviceid" type="xsd:integer"/>
+    <variable name="deviceloopIndex" type="xsd:integer"/>
+    <variable name="iotURL" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive1" partnerLink="BatchUpdate" portType="ns1:BatchUpdate_ptt" operation="PostOper"
+             variable="Receive1_PostOper_InputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from>count($Receive1_PostOper_InputVariable.request/ns2:BatchName)</from>
+        <to>$countBatchName</to>
+      </copy>
+      <copy>
+        <from>"1"</from>
+        <to>$Batchllopindex</to>
+      </copy>
+    </assign>
+    <forEach parallel="no" counterName="ForEach1Counter" name="ForEach1">
+      <startCounterValue>$Batchllopindex</startCounterValue>
+      <finalCounterValue>$countBatchName</finalCounterValue>
+      <scope name="Scope1">
+        <sequence name="Sequence1">
+          <assign name="Assign2">
+            <copy>
+              <from>count($Receive1_PostOper_InputVariable.request/ns2:BatchName[$Batchllopindex]/ns2:deviceID)</from>
+              <to>$countDeviceid</to>
+            </copy>
+            <copy>
+              <from>$Batchllopindex</from>
+              <to>$Batchllopindex</to>
+            </copy>
+            <copy>
+              <from>1</from>
+              <to>$deviceloopIndex</to>
+            </copy>
+          </assign>
+          <forEach parallel="no" counterName="ForEach2Counter" name="ForEach2">
+            <startCounterValue>$deviceloopIndex</startCounterValue>
+            <finalCounterValue>$countDeviceid</finalCounterValue>
+            <scope name="Scope2">
+              <variables>
+                <variable name="deviceNo" type="xsd:integer"/>
+                <variable name="attribute" type="xsd:string"/>
+                <variable name="id" type="xsd:string"/>
+                <variable name="value" type="xsd:string"/>
+                <variable name="appId" type="xsd:string"/>
+                <variable name="msgFormat" type="xsd:string"/>
+              </variables>
+              <sequence name="Sequence2">
+                <assign name="Assign3">
+                  <copy>
+                    <from>$Receive1_PostOper_InputVariable.request/ns2:BatchName[$Batchllopindex]/ns2:deviceID[$deviceloopIndex]</from>
+                    <to>$deviceNo</to>
+                  </copy>
+                  <copy>
+                    <from>dvm:lookupValue('oramds:/apps/DVM/BatchUpdate.dvm','industryType',$Receive1_PostOper_InputVariable.request/ns2:BatchName/ns2:industryType,'appId','0')</from>
+                    <to>$appId</to>
+                  </copy>
+                  <copy>
+                    <from>dvm:lookupValue('oramds:/apps/DVM/BatchUpdateMsgformat.dvm','IndustryType',$Receive1_PostOper_InputVariable.request/ns2:BatchName/ns2:industryType,'MsgFormat','0')</from>
+                    <to>$msgFormat</to>
+                  </copy>
+                  <copy>
+                    <from>$Receive1_PostOper_InputVariable.request/ns2:BatchName[$Batchllopindex]/ns2:attribute</from>
+                    <to>$attribute</to>
+                  </copy>
+                  <copy>
+                    <from>$Receive1_PostOper_InputVariable.request/ns2:BatchName[$Batchllopindex]/ns2:deviceID[$deviceloopIndex]</from>
+                    <to>$id</to>
+                  </copy>
+                  <copy>
+                    <from>ora:getPreference("IoTURL")</from>
+                    <to>$iotURL</to>
+                  </copy>
+                  <copy>
+                    <from>$Receive1_PostOper_InputVariable.request/ns2:BatchName[$Batchllopindex]/ns2:value</from>
+                    <to>$value</to>
+                  </copy>
+                  <copy>
+                    <from>$deviceloopIndex</from>
+                    <to>$deviceloopIndex</to>
+                  </copy>
+                  <copy>
+                    <from>$deviceloopIndex+1</from>
+                    <to>$deviceloopIndex</to>
+                  </copy>
+                </assign>
+                <extensionActivity>
+                  <bpelx:exec name="RestAPICall" language="java">
+                    <![CDATA[try{    
+String ioturl=(java.lang.String)getVariableData("iotURL"); 
+String appid=(java.lang.String)getVariableData("appId"); 
+String id = (java.lang.String)getVariableData("id"); 
+String msgformat=(java.lang.String)getVariableData("msgFormat"); 
+String attribute = (java.lang.String)getVariableData("attribute");        
+String value=(java.lang.String)getVariableData("value");       
+//String uriStr="http://oa9095.us.oracle.com:7101/iot/api/v1/endpoints/"+id+"/resources/"+attribute;    
+//String uriStr=ioturl+id+"/resources/"+attribute;   
+String uriStr=ioturl+appid+"/devices/"+id+"/deviceModels/"+msgformat+"/attributes/"+attribute;    
+java.net.URI uri= new URI(uriStr);        
+addAuditTrailEntry("REST URI:"+uri);              
+//String bodyVar="{\""+attribute+"\":\""+value+"\"}";   
+String bodyVar="{\"value\":"+value+"}";     
+addAuditTrailEntry("body >>"+bodyVar);             
+org.apache.http.entity.StringEntity  bodyParams= new StringEntity(bodyVar);        
+addAuditTrailEntry("body params>>"+bodyParams);       
+org.apache.http.client.methods.HttpPut httpPost= new HttpPut(uri);                
+httpPost.addHeader("Authorization", "Basic aW90OndlbGNvbWUx");             
+httpPost.addHeader("Content-Type", "application/json");                
+httpPost.addHeader("Accept", "application/json");                
+httpPost.setEntity(bodyParams);        
+CloseableHttpClient httpClient = org.apache.http.impl.client.HttpClients.custom().setSSLHostnameVerifier(new AllowAllHostnameVerifier()).setSslcontext(new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy(){public boolean isTrusted(X509Certificate[] arg0, String arg1) throws CertificateException{return true;}}).build()).build();           
+org.apache.http.HttpResponse response = httpClient.execute(httpPost);             
+addAuditTrailEntry("response:"+response);              
+HttpEntity entity = response.getEntity();             
+String responseString = EntityUtils.toString(entity);             
+addAuditTrailEntry("output:"+responseString);              
+}                
+catch(Exception e)                           
+{            
+    addAuditTrailEntry("Exceeption");            
+     e.printStackTrace();           
+}]]>
+                  </bpelx:exec>
+                </extensionActivity>
+              </sequence>
+            </scope>
+          </forEach>
+          <assign name="Assign5">
+            <copy>
+              <from>$Batchllopindex+1</from>
+              <to>$Batchllopindex</to>
+            </copy>
+          </assign>
+        </sequence>
+      </scope>
+    </forEach>
+    <assign name="Assign4">
+      <copy>
+        <from>"Batch Updated Successfully"</from>
+        <to>$Reply1_PostOper_OutputVariable.reply/ns2:status</to>
+      </copy>
+    </assign>
+    <reply name="Reply1" variable="Reply1_PostOper_OutputVariable" partnerLink="BatchUpdate"
+           portType="ns1:BatchUpdate_ptt" operation="PostOper"/>
+  </sequence>
+</process>

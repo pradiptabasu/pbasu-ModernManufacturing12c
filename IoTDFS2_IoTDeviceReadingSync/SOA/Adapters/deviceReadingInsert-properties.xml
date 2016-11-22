@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<properties>
+   <entry key="DEVICE_READINGS.MSG_ID:db_column_not_null">false</entry>
+   <entry key="DEVICE_READINGS.ISA:db_column_size">20</entry>
+   <entry key="DEVICE_READINGS.JSON_TEXT:db_column_type">CLOB</entry>
+   <entry key="DEVICE_READINGS.RECIVED_TIME:db_column_not_null">false</entry>
+   <entry key="DEVICE_READINGS.IOT_ID:db_column_type">VARCHAR2</entry>
+   <entry key="DEVICE_READINGS:db_column_6">MSG_ID</entry>
+   <entry key="DEVICE_READINGS:db_column_5">GENERATED_TIME</entry>
+   <entry key="DEVICE_READINGS.GENERATED_TIME:db_column_type">DATE</entry>
+   <entry key="DEVICE_READINGS.MESSAGE_TYPE:db_column_type">VARCHAR2</entry>
+   <entry key="DEVICE_READINGS:db_column_4">JSON_TEXT</entry>
+   <entry key="DEVICE_READINGS:db_column_3">ISA</entry>
+   <entry key="DEVICE_READINGS.MSG_ID:db_column_type">VARCHAR2</entry>
+   <entry key="DEVICE_READINGS:db_column_2">RECIVED_TIME</entry>
+   <entry key="DEVICE_READINGS:db_column_1">MESSAGE_TYPE</entry>
+   <entry key="DEVICE_READINGS:db_column_0">IOT_ID</entry>
+   <entry key="DEVICE_READINGS.IOT_ID:db_column_not_null">false</entry>
+   <entry key="DEVICE_READINGS.ISA:db_column_not_null">false</entry>
+   <entry key="DEVICE_READINGS.GENERATED_TIME:db_column_not_null">false</entry>
+   <entry key="DEVICE_READINGS.MESSAGE_TYPE:db_column_not_null">false</entry>
+   <entry key="DEVICE_READINGS.ISA:db_column_type">VARCHAR2</entry>
+   <entry key="root_descriptor_alias">DEVICE_READINGS</entry>
+   <entry key="DEVICE_READINGS.IOT_ID:db_column_size">20</entry>
+   <entry key="DEVICE_READINGS.MESSAGE_TYPE:db_column_size">50</entry>
+   <entry key="DEVICE_READINGS.MSG_ID:db_column_size">100</entry>
+   <entry key="DEVICE_READINGS:db_table_type">TABLE</entry>
+   <entry key="DEVICE_READINGS.RECIVED_TIME:db_column_type">DATE</entry>
+   <entry key="DEVICE_READINGS.JSON_TEXT:db_column_not_null">false</entry>
+</properties>

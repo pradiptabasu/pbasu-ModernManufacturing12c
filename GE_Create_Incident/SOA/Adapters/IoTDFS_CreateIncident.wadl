@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://xmlns.oracle.com/ModernManufacturing_v1/GE_Create_Incident/IoTDFS_CreateIncident" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="IoTDFS_CreateIncident">RestService</doc>
+   <grammars>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request" schemaLocation="../Schemas/IoTDFS_CreateIncident_IotSimAlert.xsd"/>
+        </xsd:schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident" schemaLocation="../Schemas/IoTDFS_CreateIncident_CreateIncident.xsd"/>
+        </xsd:schema>
+   </grammars>
+   <resources>
+      <resource path="/">
+         <method name="POST" soa:wsdlOperation="Operation_IoTSim">
+            <request>
+               <representation mediaType="application/xml" element="cns:IoTSimAlert" xmlns:cns="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request"/>
+               <representation mediaType="application/json" element="cns:IoTSimAlert" xmlns:cns="http://TargetNamespace.com/IotSimulatorAlert_Operation_IoTSim_request"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/xml" element="cns:IncidentResponse" xmlns:cns="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident"/>
+               <representation mediaType="application/json" element="cns:IncidentResponse" xmlns:cns="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident/CreateIncident"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

@@ -1,0 +1,191 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Mar 16 12:41:00 IST 2016
+  Author:  himshekh
+  Type: BPEL 1.1 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="IoTDFS2_IoTDeviceReadingSync"
+               targetNamespace="http://xmlns.oracle.com/DEVICE_READING/IoTDFS2_IoTDeviceReadingSync/IoTDFS2_IoTDeviceReadingSync"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/DEVICE_READING/IoTDFS2_IoTDeviceReadingSync/IoTDFS2_IoTDeviceReadingSync"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/DEVICE_READING/IoTDFS2_IoTDeviceReadingSync/Sync"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns2="http://www.example.org"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/DEVICE_READING/IoTDFS2_IoTDeviceReadingSync/deviceReadingInsert"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/deviceReadingInsert"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS2_IoTDeviceReadingSync/findDeviceISA"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/findDeviceISA"
+         xmlns:ns7="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/SOACS/IoTDFS2_IoTDeviceReadingSync/selectDeviceReadings"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/selectDeviceReadings">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <bpelx:annotation>
+    <bpelx:analysis>
+      <bpelx:property name="wsdlFile">
+        <![CDATA[../WSDLs/Sync.wsdl]]>
+      </bpelx:property>
+    </bpelx:analysis>
+  </bpelx:annotation>
+  <partnerLinks>
+    <partnerLink name="Sync" partnerLinkType="ns1:Sync" myRole="SyncProvider"/>
+    <partnerLink name="deviceReadingInsert" partnerLinkType="ns3:deviceReadingInsert_plt"
+                 partnerRole="deviceReadingInsert_role"/>
+    <partnerLink name="findDeviceISA" partnerLinkType="ns5:findDeviceISA_plt" partnerRole="findDeviceISA_role"/>
+    <partnerLink name="errorEmail" partnerLinkType="ns7:EmailNotificationProcess"
+                 partnerRole="EmailNotificationProcessProvider"/>
+    <partnerLink name="selectDeviceReadings" partnerLinkType="ns8:selectDeviceReadings_plt"
+                 partnerRole="selectDeviceReadings_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Receive_PostOperation_InputVariable" messageType="ns1:PostOperation_inputMessage"/>
+    <variable name="transformResultVar" element="ns2:TransformResultReq"/>
+    <variable name="Reply1_PostOperation_OutputVariable" messageType="ns1:PostOperation_outputMessage"/>
+    <variable name="Invoke_insert_InputVariable" messageType="ns3:DeviceReadingsCollection_msg"/>
+    <variable name="GetISAName_OutputVariable" messageType="ns5:DeviceInstanceCollection_msg"/>
+    <variable name="Invoke_ErrorEmailNotification_process_InputVariable"
+              messageType="ns7:EmailNotificationProcessRequestMessage"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence2">
+        <assign name="Assign_ErrorEmail_Input">
+          <copy>
+            <from expression="ora:getFlowId()"/>
+            <to variable="Invoke_ErrorEmailNotification_process_InputVariable" part="payload"
+                query="/ns7:process/ns7:processInstanceId"/>
+          </copy>
+          <copy>
+            <from expression="ora:getFaultAsString()"/>
+            <to variable="Invoke_ErrorEmailNotification_process_InputVariable" part="payload"
+                query="/ns7:process/ns7:errorMessage"/>
+          </copy>
+          <copy>
+            <from expression="ora:getProcessId()"/>
+            <to variable="Invoke_ErrorEmailNotification_process_InputVariable" part="payload"
+                query="/ns7:process/ns7:processName"/>
+          </copy>
+          <copy>
+            <from expression="'ErrorEmail'"/>
+            <to variable="Invoke_ErrorEmailNotification_process_InputVariable" part="payload"
+                query="/ns7:process/ns7:emailType"/>
+          </copy>
+          <copy>
+            <from expression="'An Error has occured. Please try after sometime.'"/>
+            <to variable="Reply1_PostOperation_OutputVariable" part="reply" query="/ns2:DeviceReadingRes/ns2:Status"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_ErrorEmailNotification" inputVariable="Invoke_ErrorEmailNotification_process_InputVariable"
+                partnerLink="errorEmail" portType="ns7:EmailNotificationProcess" operation="process"/>
+        <reply name="Reply_Error_response" variable="Reply1_PostOperation_OutputVariable" partnerLink="Sync"
+               portType="ns1:Sync_ptt" operation="PostOperation"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <sequence name="main">
+    <receive name="Receive" createInstance="yes" variable="Receive_PostOperation_InputVariable" partnerLink="Sync"
+             portType="ns1:Sync_ptt" operation="PostOperation"/>
+    <scope name="Scope_ISAName">
+      <variables>
+        <variable name="GetISAName_InputVariable" messageType="ns5:findDeviceISASelect_inputParameters"/>
+      </variables>
+      <sequence name="Sequence1">
+        <assign name="Assign_IoTId">
+          <copy>
+            <from variable="Receive_PostOperation_InputVariable" part="request"
+                  query="/ns2:DeviceReadingSyncReq[1]/ns2:source[1]"/>
+            <to variable="GetISAName_InputVariable" part="findDeviceISASelect_inputParameters"
+                query="/ns6:findDeviceISASelect_deviceIdInputParameters/ns6:deviceId"/>
+          </copy>
+        </assign>
+        <invoke name="GetISAName" inputVariable="GetISAName_InputVariable" outputVariable="GetISAName_OutputVariable"
+                partnerLink="findDeviceISA" portType="ns5:findDeviceISA_ptt" operation="findDeviceISASelect"/>
+      </sequence>
+    </scope>
+    <scope name="Scope_PersistDevicereadings">
+      <sequence>
+        <assign name="XML_JSON">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('../Transformations/XML_JSON_Transformation.xsl', $Receive_PostOperation_InputVariable.request)"/>
+            <to variable="transformResultVar"/>
+          </copy>
+        </assign>
+        <assign name="AssignDRinsertObj">
+          <copy>
+            <from expression="bpws:getVariableData('Receive_PostOperation_InputVariable','request','/ns2:DeviceReadingSyncReq[1]/ns2:source')"/>
+            <to variable="Invoke_insert_InputVariable" part="DeviceReadingsCollection"
+                query="/ns4:DeviceReadingsCollection/ns4:DeviceReadings/ns4:iotId"/>
+          </copy>
+          <copy>
+            <from expression="bpws:getVariableData('Receive_PostOperation_InputVariable','request','/ns2:DeviceReadingSyncReq[1]/ns2:id')"/>
+            <to variable="Invoke_insert_InputVariable" part="DeviceReadingsCollection"
+                query="/ns4:DeviceReadingsCollection/ns4:DeviceReadings/ns4:msgId"/>
+          </copy>
+          <copy>
+            <from variable="transformResultVar" query="/ns2:TransformResultReq/ns2:TransformResult"/>
+            <to variable="Invoke_insert_InputVariable" part="DeviceReadingsCollection"
+                query="/ns4:DeviceReadingsCollection/ns4:DeviceReadings/ns4:jsonText"/>
+          </copy>
+          <copy>
+            <from expression="bpws:getVariableData('Receive_PostOperation_InputVariable','request','/ns2:DeviceReadingSyncReq[1]/ns2:type')"/>
+            <to variable="Invoke_insert_InputVariable" part="DeviceReadingsCollection"
+                query="/ns4:DeviceReadingsCollection/ns4:DeviceReadings/ns4:messageType"/>
+          </copy>
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="Invoke_insert_InputVariable" part="DeviceReadingsCollection"
+                query="/ns4:DeviceReadingsCollection/ns4:DeviceReadings/ns4:recivedTime"/>
+          </copy>
+          <copy>
+            <from variable="GetISAName_OutputVariable" part="DeviceInstanceCollection"
+                  query="/ns6:DeviceInstanceCollection/ns6:DeviceInstance/ns6:isa"/>
+            <to variable="Invoke_insert_InputVariable" part="DeviceReadingsCollection"
+                query="/ns4:DeviceReadingsCollection/ns4:DeviceReadings/ns4:isa"/>
+          </copy>
+          <copy>
+            <from expression="xp20:current-dateTime()"/>
+            <to variable="Invoke_insert_InputVariable" part="DeviceReadingsCollection"
+                query="/ns4:DeviceReadingsCollection/ns4:DeviceReadings/ns4:generatedTime"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeDeviceReadingObj" inputVariable="Invoke_insert_InputVariable"
+                partnerLink="deviceReadingInsert" portType="ns3:deviceReadingInsert_ptt" operation="insert"/>
+        <assign name="AssignSyncReply">
+          <copy>
+            <from expression='"Suceesful insertion"'/>
+            <to variable="Reply1_PostOperation_OutputVariable" part="reply" query="/ns2:DeviceReadingRes/ns2:Status"/>
+          </copy>
+        </assign>
+      </sequence>
+    </scope>
+    <reply name="Reply1" variable="Reply1_PostOperation_OutputVariable" partnerLink="Sync" portType="ns1:Sync_ptt"
+           operation="PostOperation"/>
+  </sequence>
+</process>

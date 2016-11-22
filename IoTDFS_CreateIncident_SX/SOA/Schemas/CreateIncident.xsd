@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/IoT_DFS/IoTDFS_CreateIncident_SX/CreateIncident" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="CreateIncidentReq">
+      <complexType>
+         <sequence>
+            <element name="Subject" type="string"/>
+            <element name="Contact" type="string" minOccurs="0"/>
+            <element name="Asset" type="string"/>
+            <element name="Status" type="string" minOccurs="0"/>
+            <element name="Severity" type="string"/>
+            <element name="Organization" type="string" minOccurs="0"/>
+            <element name="Category" type="string"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="IncidentResponse">
+      <complexType>
+         <sequence>
+            <element name="result" type="string"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

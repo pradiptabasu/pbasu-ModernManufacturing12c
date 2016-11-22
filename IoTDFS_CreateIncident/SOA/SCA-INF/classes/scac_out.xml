@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='Error_Email']</loc>
+      <line>86</line>
+      <col>101</col>
+      <file>D:\WorkSpace\ModernManufacturing_v1\IoTDFS_CreateIncident\SOA\composite.xml</file>
+      <name>D:\WorkSpace\ModernManufacturing_v1\IoTDFS_CreateIncident\SOA\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "Error_Email":"{http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess}EmailNotificationProcess_pt" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='Error_Email']</loc>
+      <line>86</line>
+      <col>101</col>
+      <file>D:\WorkSpace\ModernManufacturing_v1\IoTDFS_CreateIncident\SOA\composite.xml</file>
+      <name>D:\WorkSpace\ModernManufacturing_v1\IoTDFS_CreateIncident\SOA\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "Error_Email":"{http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess}EmailNotificationProcess_pt" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>49</line>
+      <col/>
+      <file>BPEL/CreateIncident.bpel</file>
+      <name>BPEL/CreateIncident.bpel</name>
+      <fix>Fix the process to be *either* durable or synchronous.</fix>
+      <msg>Process "CreateIncident" is both durable (onMessage,Receive,Wait) and synchronous.</msg>
+   </Fault>
+</Faults>

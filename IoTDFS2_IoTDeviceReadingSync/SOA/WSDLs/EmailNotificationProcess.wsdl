@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="EmailNotificationProcess" targetNamespace="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:client="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+   <plnk:partnerLinkType name="EmailNotificationProcess">
+      <plnk:role name="EmailNotificationProcessProvider" portType="client:EmailNotificationProcess"/>
+   </plnk:partnerLinkType>
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/SOACS/EmailNotificationProcess/EmailNotificationProcess" schemaLocation="oramds:/apps/Schemas/EmailNotificationProcess.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="EmailNotificationProcessRequestMessage">
+      <wsdl:part name="payload" element="client:process"/>
+   </wsdl:message>
+   <wsdl:portType name="EmailNotificationProcess">
+      <wsdl:operation name="process">
+         <wsdl:input message="client:EmailNotificationProcessRequestMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="EmailNotificationProcessBinding" type="client:EmailNotificationProcess">
+      <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="process">
+         <soap:operation style="document" soapAction="process"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+      </wsdl:operation>
+   </wsdl:binding>
+</wsdl:definitions>
